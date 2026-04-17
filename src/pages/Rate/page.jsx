@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const RateTable = ({ selectionMode = false }) => {
-  const [activeTab, setActiveTab] = useState("cc");
+  const [activeTab] = useState("cc");
     const [filters, setFilters] = useState({
         country: "",
         status: "",
