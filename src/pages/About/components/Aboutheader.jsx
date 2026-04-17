@@ -8,35 +8,35 @@ export default function VoIPHero() {
   const [tickets, setTickets] = useState(24);
   const [queued, setQueued] = useState(3);
 
-useEffect(() => {
-  const interval = setInterval(() => {
+  useEffect(() => {
+    const interval = setInterval(() => {
 
-    // Tickets fluctuation
-    setTickets(prev => {
-      const change = Math.floor(Math.random() * 5) - 2;
-      return Math.max(0, prev + change);
-    });
+      // Tickets fluctuation
+      setTickets(prev => {
+        const change = Math.floor(Math.random() * 5) - 2;
+        return Math.max(0, prev + change);
+      });
 
-    // ✅ Queued fluctuation (slower/smaller changes)
-    setQueued(prev => {
-      const change = Math.floor(Math.random() * 3) - 1; // -1 to +1
-      return Math.max(0, prev + change);
-    });
+      // ✅ Queued fluctuation (slower/smaller changes)
+      setQueued(prev => {
+        const change = Math.floor(Math.random() * 3) - 1; // -1 to +1
+        return Math.max(0, prev + change);
+      });
 
-  }, 2000);
+    }, 2000);
 
-  return () => clearInterval(interval);
-}, []);
+    return () => clearInterval(interval);
+  }, []);
 
-const stats = [
-  { label: "Tickets", val: tickets, color: "#7c3aed", bg: "#f3e8ff" },
-  { label: "Queued", val: queued, color: "#ea580c", bg: "#fff7ed" }, // ✅ dynamic
-  { label: "Avg Wait", val: "0:18", color: "#2563eb", bg: "#eff6ff" },
-  { label: "CSAT", val: "98%", color: "#059669", bg: "#ecfdf5" },
-];
+  const stats = [
+    { label: "Tickets", val: tickets, color: "#7c3aed", bg: "#f3e8ff" },
+    { label: "Queued", val: queued, color: "#ea580c", bg: "#fff7ed" }, // ✅ dynamic
+    { label: "Avg Wait", val: "0:18", color: "#2563eb", bg: "#eff6ff" },
+    { label: "CSAT", val: "98%", color: "#059669", bg: "#ecfdf5" },
+  ];
 
   return (
-    <div style={{height:"88vh"}} className="w-full bg-white flex justify-around items-center px-1">
+    <div style={{ height: "88vh" }} className="w-full bg-white flex justify-around items-center px-1">
       <style>{`
         @keyframes waveBar {
           from { transform: scaleY(0.5); }
@@ -61,18 +61,21 @@ const stats = [
 
       {/* ── Left Side: Content ── */}
       {/* Left Side */}
+
       <div className="space-y-8 animate-pop-in lg:col-span-1">
         <div className="space-y-4">
 
-          <h1 className="text-4xl lg:text-4xl  text-gray-600 leading-tight mb-6">
-
-            Cloud VoIP Built for
-            <span className="text-orange-600">  Modern Teams.</span>
+          <h1 className="font-[system-ui] text-3xl sm:text-4xl leading-[1.08] tracking-tight text-gray-500">
+            Cloud VoIP Built for{" "}
+            <span className="text-blue-500">
+              Modern Teams
+            </span>
           </h1>
-          <p className="text-lg text-slate-600 max-w-lg leading-relaxed">
-            Experience crystal-clear voice quality and enterprise-grade
-            security. Connect your global workforce with sub-80ms latency
-            and real-time analytics.
+
+          <p className="font-['DM_Sans',sans-serif] text-gray-500 text-sm md:text-[16px] leading-7 tracking-normal
+    text-justify max-w-[600px] [@media(min-width:1300px)]:max-w-[560px]">
+            Experience crystal-clear VoIP communication powered by next-generation infrastructure built for modern enterprises.
+            Deliver secure, scalable, and ultra-low latency global calling with real-time analytics, intelligent routing, and 99.99% uptime for call centers, SaaS platforms, and wholesale carriers.
           </p>
         </div>
 

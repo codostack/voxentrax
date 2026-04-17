@@ -12,12 +12,12 @@ const SocialLanding = () => {
       {/* Left Side: Content */}
      <div className="w-full md:w-1/2 p-12 lg:p-24 z-10 space-y-6">
 
-  <h1 className="text-4xl text-gray-600 tracking-tighter leading-tight">
-    Grow Your Digital{" "}
-    <span className="  text-orange-600 ">
-      Presence Together
-    </span>
-  </h1>
+            <h1 className="font-[system-ui] text-3xl sm:text-4xl leading-[1.08] tracking-tight text-gray-500">
+            Grow Your Digital{" "}
+            <span className="text-blue-500">
+              Presence Together
+            </span>
+          </h1>
 
           <p className="font-['DM_Sans',sans-serif] text-gray-500 text-sm md:text-[16px] leading-7 tracking-normal
               text-justify max-w-[600px] [@media(min-width:1300px)]:max-w-[560px]">Connect with your audience across all platforms using our integrated solutions.

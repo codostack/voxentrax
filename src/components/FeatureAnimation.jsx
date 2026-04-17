@@ -1,95 +1,101 @@
-import { FaPhoneAlt, FaGlobe, FaHeadset, FaShieldAlt } from "react-icons/fa";
+import React from "react";
+import {
+  PhoneCall,
+  Headphones,
+  Globe,
+  ShieldCheck,
+  Zap,
+  Server,
+  MessageSquare,
+  Radio,
+} from "lucide-react";
 
-const features = [
-  {
-    icon: <FaPhoneAlt />,
-    title: "HD Voice Quality",
-    desc: "Crystal clear calls powered by smart VoIP routing."
-  },
-  {
-    icon: <FaGlobe />,
-    title: "Global Coverage",
-    desc: "Reliable connections across worldwide networks."
-  },
-  {
-    icon: <FaHeadset />,
-    title: "24/7 Support",
-    desc: "Expert telecom engineers available anytime."
-  },
-  {
-    icon: <FaShieldAlt />,
-    title: "Secure Network",
-    desc: "Encrypted communication for safe calling."
-  }
+/* ───────── SAFE COLOR MAP ───────── */
+const serviceStyles = [
+  { bg: "bg-blue-500", border: "border-blue-200" },
+  { bg: "bg-emerald-500", border: "border-emerald-200" },
+  { bg: "bg-purple-500", border: "border-purple-200" },
+  { bg: "bg-rose-500", border: "border-rose-200" },
+  { bg: "bg-amber-500", border: "border-amber-200" },
+  { bg: "bg-sky-500", border: "border-sky-200" },
+  { bg: "bg-indigo-500", border: "border-indigo-200" },
+  { bg: "bg-teal-500", border: "border-teal-200" },
 ];
 
-export default function VoipFeatures() {
+const services = [
+  { label: "VoIP Voice Solutions", desc: "High-quality global calling", icon: PhoneCall },
+  { label: "Call Center Platform", desc: "Enterprise support infrastructure", icon: Headphones },
+  { label: "Global Routing", desc: "Smart carrier routing system", icon: Globe },
+  { label: "Secure Communication", desc: "Encrypted voice & data security", icon: ShieldCheck },
+  { label: "Low Latency Network", desc: "Ultra-fast telecom backbone", icon: Zap },
+  { label: "Cloud PBX System", desc: "Scalable business telephony", icon: Server },
+  { label: "SMS Gateway", desc: "Bulk messaging delivery system", icon: MessageSquare },
+  { label: "SIP Trunking", desc: "Carrier-grade connectivity", icon: Radio },
+];
+
+export default function ServicesSection() {
   return (
-    <section className="w-full h-[50vh] bg-white flex items-center justify-center overflow-hidden">
+    <section className="relative w-full py-16 overflow-hidden bg-white">
 
-      <div className="max-w-6xl w-full px-6">
+      {/* ───── Background Layers ───── */}
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-100/50 via-white to-white" />
+      <div className="absolute inset-0 bg-gradient-to-t from-blue-100/40 via-transparent to-transparent" />
 
-        {/* Heading */}
-        <h2 className="text-center text-3xl font-bold text-[#0891b2] mb-12">
-          Powerful VoIP Features
+      {/* header */}
+      <div className="relative max-w-6xl mx-auto px-6 text-center mb-12">
+        <h2 className="text-3xl md:text-4xl text-grey-700">
+          Our Communication Services
         </h2>
+      </div>
 
-        {/* Feature Row */}
-        <div className="grid md:grid-cols-4 gap-8 relative">
+      {/* marquee */}
+      <div className="relative">
+        <div className="absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-white to-transparent z-10" />
+        <div className="absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-white to-transparent z-10" />
 
-          {/* Center Line */}
-          <div className="hidden md:block absolute top-8 left-0 w-full h-[2px] bg-[#0891b2]/20"></div>
+        <div className="flex w-max animate-scroll gap-6 px-6">
+          {[...services, ...services].map((item, i) => {
+            const Icon = item.icon;
+            const style = serviceStyles[i % serviceStyles.length];
 
-          {features.map((item, index) => (
-            <div
-              key={index}
-              className="group relative flex flex-col items-center text-center
-                         opacity-0 translate-y-10 animate-slideUp"
-              style={{ animationDelay: `${index * 0.25}s` }}
-            >
-              {/* Icon Circle */}
+            return (
               <div
-                className="w-16 h-16 rounded-full bg-[#0891b2]
-                           text-white flex items-center justify-center
-                           text-2xl shadow-lg
-                           transition-all duration-500
-                           group-hover:scale-110
-                           group-hover:shadow-[0_0_25px_rgba(8,145,178,0.6)]"
+                key={i}
+                className={`min-w-[270px] bg-white border ${style.border} shadow-sm rounded-2xl p-5 flex gap-4 items-start transition-all duration-300 hover:shadow-lg hover:-translate-y-1`}
               >
-                {item.icon}
+                {/* icon */}
+                <div className={`${style.bg} p-3 rounded-xl text-white`}>
+                  <Icon size={20} />
+                </div>
+
+                {/* text */}
+                <div className="text-left">
+                  <h3 className="text-sm font-semibold text-gray-900">
+                    {item.label}
+                  </h3>
+                  <p className="text-xs text-gray-500 mt-1 leading-snug">
+                    {item.desc}
+                  </p>
+                </div>
               </div>
-
-              {/* Title */}
-              <h3 className="mt-5 font-semibold text-[#0891b2]">
-                {item.title}
-              </h3>
-
-              {/* Desc */}
-              <p className="text-sm text-gray-500 mt-2 max-w-[220px]">
-                {item.desc}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
-      {/* Animation */}
-      <style jsx>{`
-        @keyframes slideUp {
-          from {
-            opacity: 0;
-            transform: translateY(40px);
+      {/* animation */}
+      <style>
+        {`
+          @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
           }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
 
-        .animate-slideUp {
-          animation: slideUp 0.8s ease forwards;
-        }
-      `}</style>
+          .animate-scroll {
+            animation: scroll 22s linear infinite;
+          }
+        `}
+      </style>
     </section>
   );
 }

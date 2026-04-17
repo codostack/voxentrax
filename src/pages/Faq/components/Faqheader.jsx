@@ -14,7 +14,7 @@ function InfographicBars() {
     <div className="flex items-end justify-center gap-3 w-full">
       {bars.map((bar, i) => (
         <div key={i} className="group flex flex-col items-center cursor-pointer">
-          
+
           {/* BAR */}
           <div
             className={`
@@ -54,9 +54,12 @@ export default function Faqheader() {
 
         {/* LEFT */}
         <div className="flex-1">
-          <h1 className="text-4xl md:text-5xl text-slate-900 leading-tight mb-6">
-            Frequently <span className="text-blue-600">Asked</span> Questions
-          </h1>
+          <h1 className="font-[system-ui] text-3xl sm:text-4xl leading-[1.08] tracking-tight text-gray-500 mb-6">
+            Frequently Asked{" "}
+            <span className="text-blue-500">
+              Questions
+            </span>          
+            </h1>
 
           <p className="text-slate-500 leading-relaxed mb-8 max-w-md">
             Find quick answers to the most common questions about our platform,
@@ -64,41 +67,43 @@ export default function Faqheader() {
             you through setup, features, and support.
           </p>
 
-          <div className="flex gap-4">
-            <button className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:scale-105 transition">
-              View All FAQs
+                    <div className="flex items-center gap-3 flex-wrap justify-center [@media(min-width:1300px)]:justify-start pt-1">
+            <button className="inline-flex items-center gap-2 px-6 py-3 text-white text-sm font-semibold
+              bg-blue-500 hover:bg-blue-600 transition-all duration-200 rounded-lg shadow-md shadow-blue-100 cursor-pointer">
+             View All FAQs
             </button>
-
-            <button className="border border-gray-300 px-6 py-3 rounded-lg font-semibold hover:text-blue-600 hover:border-blue-600 transition">
+            <button className="inline-flex items-center gap-2 px-5 py-3 text-sm font-medium
+              text-gray-700 border border-gray-300 bg-gray-50
+              hover:bg-gray-100 hover:border-gray-400 transition-all duration-200 rounded-lg cursor-pointer">
               Contact Support
             </button>
           </div>
         </div>
 
-<div className="flex-1 flex justify-end items-center">
-  <div className="w-full max-w-[1100px] h-[420px] flex flex-col justify-end gap-6">
+        <div style={{marginTop:"-60px"}} className="flex-1 flex justify-end items-center">
+          <div className="w-full max-w-[1100px] h-[420px] flex flex-col justify-end gap-6">
 
-    {/* INFOGRAPHIC */}
-    <div className="w-full flex justify-center">
-      <InfographicBars />
-    </div>
+            {/* INFOGRAPHIC */}
+            <div className="w-full flex justify-center">
+              <InfographicBars />
+            </div>
 
-    {/* SEARCH BAR */}
-    <div style={{marginTop:"15px"}} className="w-full flex justify-center">
-      <div className="bg-white rounded-xl px-4 py-3 flex items-center gap-3 w-[90%] max-w-[540px] border border-orange-400">
-        
-        <FaSearch className="text-gray-400 text-2xl" />
+            {/* SEARCH BAR */}
+            <div style={{ marginTop: "15px" }} className="w-full flex justify-center">
+              <div className="bg-white rounded-xl px-4 py-3 flex items-center gap-3 w-[90%] max-w-[540px] border border-orange-400">
 
-        <input
-          type="text"
-          placeholder="Search your questions..."
-          className="w-full outline-none text-sm text-gray-700 placeholder-gray-400"
-        />
-      </div>
-    </div>
+                <FaSearch className="text-gray-400 text-2xl" />
 
-  </div>
-</div>
+                <input
+                  type="text"
+                  placeholder="Search your questions..."
+                  className="w-full outline-none text-sm text-gray-700 placeholder-gray-400"
+                />
+              </div>
+            </div>
+
+          </div>
+        </div>
 
       </div>
 

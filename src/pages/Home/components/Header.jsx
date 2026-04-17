@@ -405,9 +405,10 @@ export default function VoipHeader() {
                         [@media(min-width:1300px)]:ml-[25px] [@media(min-width:1300px)]:-mt-[60px]
                         [@media(min-width:1300px)]:max-w-none [@media(min-width:1300px)]:w-auto">
 
-          <h1 className="font-[system-ui] text-3xl sm:text-4xl leading-[1.08] tracking-tight text-gray-700">
-            Connecting Through
-            <span className="shimmer-text"> Smart VoIP</span>
+          <h1 className="font-[system-ui] text-3xl sm:text-4xl leading-[1.08] tracking-tight text-gray-500">
+            Connecting Through {" "}
+              <span className="text-blue-500">
+  Smart VoIP</span>
           </h1>
 
           <p className="font-['DM_Sans',sans-serif] text-gray-500 text-sm md:text-[16px] leading-7 tracking-normal

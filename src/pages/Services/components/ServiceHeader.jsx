@@ -52,12 +52,14 @@ const quadrants = [
       <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
         {/* LEFT SIDE: HEADER CONTENT */}
         <div className="z-10 space-y-8">
-          <h1 className="text-4xl text-gray-600  tracking-tighter leading-none">
-            VOIP  {" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-indigo-600">
-              INFRASTRUCTURE
-            </span>
-          </h1>
+
+          <h1 className="font-[system-ui] text-3xl sm:text-4xl leading-[1.08] tracking-tight text-gray-500">
+  VOIP{" "}
+  <span className="text-blue-500">
+    INFRASTRUCTURE
+  </span>
+</h1>
+
 <p className="font-['DM_Sans',sans-serif] text-gray-500 text-sm md:text-[16px] leading-7 tracking-normal
   text-justify max-w-[600px] [@media(min-width:1300px)]:max-w-[560px]">
 Build a carrier-grade VoIP infrastructure designed for high-volume call centers and wholesale voice operations. Optimize call routing with intelligent LCR, ensure low-latency connectivity across global routes, and maintain superior call quality with real-time monitoring and failover systems. Scalable, secure, and engineered to handle millions of minutes without compromise.

@@ -231,27 +231,197 @@ const categories = [
 ];
 
 const faqs = [
-  { id: 1, cat: "General", q: "What is VoIP?", a: "VoIP (Voice over Internet Protocol) allows you to make voice and video calls over the internet instead of traditional phone lines." },
-  { id: 2, cat: "General", q: "Who can use VoIP services?", a: "VoIP is suitable for businesses of all sizes, remote teams, and individuals who need flexible communication." },
-  { id: 3, cat: "General", q: "Can I make international calls?", a: "Yes, VoIP allows you to make international calls at significantly reduced rates compared to traditional providers." },
-  { id: 4, cat: "General", q: "How quickly can I get started?", a: "Most users can set up and start using VoIP within minutes after account activation." },
-  { id: 5, cat: "Technical", q: "How does VoIP work?", a: "Your voice is converted into digital packets and transmitted securely over the internet using advanced codecs." },
-  { id: 6, cat: "Technical", q: "What internet speed is required?", a: "A stable connection with at least 100 kbps per call is recommended for optimal quality." },
-  { id: 7, cat: "Technical", q: "What happens if my internet goes out?", a: "We offer Call Continuity which automatically reroutes calls to your mobile device if your office internet fails." },
-  { id: 8, cat: "Technical", q: "What router settings are best?", a: "Enabling Quality of Service (QoS) on your router to prioritize SIP traffic ensures the best audio quality." },
-  { id: 9, cat: "Security", q: "Is my data safe?", a: "We use TLS and SRTP end-to-end encryption, backed by ISO-certified cloud infrastructure." },
-  { id: 10, cat: "Security", q: "Do you protect against spam calls?", a: "We implement AI-driven fraud detection, IP filtering, and traffic monitoring to prevent unauthorized access." },
-  { id: 11, cat: "Security", q: "How do you prevent 'vishing'?", a: "We use STIR/SHAKEN protocols to verify caller ID and protect against number spoofing." },
-  { id: 12, cat: "Account", q: "Can I port my existing number?", a: "Yes — you can transfer your existing business number with zero downtime. Our team manages the entire process." },
-  { id: 13, cat: "Account", q: "Can I cancel anytime?", a: "Yes. There are no long-term contracts. You can upgrade, downgrade, or cancel anytime from your dashboard." },
-  { id: 14, cat: "Account", q: "Are there activation fees?", a: "No. Our pricing is transparent. Setup and activation are 100% free with no hidden charges." },
-  { id: 15, cat: "Features", q: "What features are included?", a: "HD calling, IVR systems, real-time analytics, recordings, and CRM integrations are all included." },
-  { id: 16, cat: "Features", q: "Do you offer call recording?", a: "Yes, automatic and on-demand call recording is available with secure cloud storage." },
-  { id: 17, cat: "Features", q: "Does the platform support Video Conferencing?", a: "Absolutely. We provide HD video conferencing with screen sharing and meeting recording for up to 500 participants." },
-  { id: 18, cat: "Features", q: "Is VoIP suitable for remote teams?", a: "Yes. It enables teams to communicate through voice, video, and messaging from anywhere in the world." },
-  { id: 19, cat: "Support", q: "Can I use VoIP for emergency calls (911)?", a: "Yes, our service supports E911. You must maintain an updated physical address in your account settings for emergency services." },
-  { id: 20, cat: "Support", q: "What support is available?", a: "We provide 24/7 technical support via live chat, email, and phone for all our customers." },
-  { id: 21, cat: "Support", q: "Is training provided for my staff?", a: "Yes, we offer free onboarding webinars and a comprehensive video knowledge base to get your team up to speed." }
+  /* ───────── GENERAL (5) ───────── */
+  {
+    id: 1,
+    cat: "General",
+    q: "What is VoIP?",
+    a: "VoIP (Voice over Internet Protocol) allows you to make voice and video calls over the internet instead of traditional phone lines.",
+  },
+  {
+    id: 2,
+    cat: "General",
+    q: "Who can use VoIP services?",
+    a: "VoIP is suitable for businesses of all sizes, remote teams, and individuals who need flexible communication.",
+  },
+  {
+    id: 3,
+    cat: "General",
+    q: "Can I make international calls?",
+    a: "Yes, VoIP allows you to make international calls at significantly reduced rates compared to traditional providers.",
+  },
+  {
+    id: 4,
+    cat: "General",
+    q: "How quickly can I get started?",
+    a: "Most users can set up and start using VoIP within minutes after account activation.",
+  },
+  {
+    id: 5,
+    cat: "General",
+    q: "Do I need special equipment?",
+    a: "No special hardware is required. You can use VoIP on mobile apps, desktop software, or IP phones.",
+  },
+
+  /* ───────── TECHNICAL (5) ───────── */
+  {
+    id: 6,
+    cat: "Technical",
+    q: "How does VoIP work?",
+    a: "Your voice is converted into digital packets and transmitted securely over the internet using advanced codecs.",
+  },
+  {
+    id: 7,
+    cat: "Technical",
+    q: "What internet speed is required?",
+    a: "A stable connection with at least 100 kbps per call is recommended for optimal quality.",
+  },
+  {
+    id: 8,
+    cat: "Technical",
+    q: "What happens if my internet goes out?",
+    a: "We offer Call Continuity which automatically reroutes calls to your mobile device if your office internet fails.",
+  },
+  {
+    id: 9,
+    cat: "Technical",
+    q: "What router settings are best?",
+    a: "Enabling Quality of Service (QoS) on your router to prioritize SIP traffic ensures the best audio quality.",
+  },
+  {
+    id: 10,
+    cat: "Technical",
+    q: "Does VoIP support HD audio?",
+    a: "Yes, VoIP systems use wideband codecs to deliver HD voice quality over stable internet connections.",
+  },
+
+  /* ───────── SECURITY (5) ───────── */
+  {
+    id: 11,
+    cat: "Security",
+    q: "Is my data safe?",
+    a: "We use TLS and SRTP end-to-end encryption, backed by ISO-certified cloud infrastructure.",
+  },
+  {
+    id: 12,
+    cat: "Security",
+    q: "Do you protect against spam calls?",
+    a: "We implement AI-driven fraud detection, IP filtering, and traffic monitoring to prevent unauthorized access.",
+  },
+  {
+    id: 13,
+    cat: "Security",
+    q: "How do you prevent vishing attacks?",
+    a: "We use STIR/SHAKEN protocols to verify caller ID and protect against number spoofing.",
+  },
+  {
+    id: 14,
+    cat: "Security",
+    q: "Is VoIP encrypted?",
+    a: "Yes, all calls and signaling are encrypted using modern industry standards.",
+  },
+  {
+    id: 15,
+    cat: "Security",
+    q: "Can hackers intercept VoIP calls?",
+    a: "With encrypted transmission and secure infrastructure, interception is highly unlikely and prevented by default.",
+  },
+
+  /* ───────── ACCOUNT (5) ───────── */
+  {
+    id: 16,
+    cat: "Account",
+    q: "Can I port my existing number?",
+    a: "Yes — you can transfer your existing business number with zero downtime. Our team manages the entire process.",
+  },
+  {
+    id: 17,
+    cat: "Account",
+    q: "Can I cancel anytime?",
+    a: "Yes. There are no long-term contracts. You can upgrade, downgrade, or cancel anytime from your dashboard.",
+  },
+  {
+    id: 18,
+    cat: "Account",
+    q: "Are there activation fees?",
+    a: "No. Setup and activation are 100% free with no hidden charges.",
+  },
+  {
+    id: 19,
+    cat: "Account",
+    q: "Can I use multiple devices?",
+    a: "Yes, you can log in from multiple devices including mobile, desktop, and desk phones.",
+  },
+  {
+    id: 20,
+    cat: "Account",
+    q: "Is billing monthly or yearly?",
+    a: "We offer flexible billing options including monthly and discounted yearly plans.",
+  },
+
+  /* ───────── FEATURES (5) ───────── */
+  {
+    id: 21,
+    cat: "Features",
+    q: "What features are included?",
+    a: "HD calling, IVR systems, real-time analytics, recordings, and CRM integrations are included.",
+  },
+  {
+    id: 22,
+    cat: "Features",
+    q: "Do you offer call recording?",
+    a: "Yes, automatic and on-demand call recording is available with secure cloud storage.",
+  },
+  {
+    id: 23,
+    cat: "Features",
+    q: "Does the platform support video conferencing?",
+    a: "Yes, HD video conferencing with screen sharing and recording for up to 500 participants is supported.",
+  },
+  {
+    id: 24,
+    cat: "Features",
+    q: "Is VoIP suitable for remote teams?",
+    a: "Yes, it enables global communication through voice, video, and messaging from anywhere.",
+  },
+  {
+    id: 25,
+    cat: "Features",
+    q: "Does it integrate with CRM tools?",
+    a: "Yes, it integrates with popular CRM platforms for seamless workflow automation.",
+  },
+
+  /* ───────── SUPPORT (5) ───────── */
+  {
+    id: 26,
+    cat: "Support",
+    q: "Can I use VoIP for emergency calls?",
+    a: "Yes, we support E911. You must maintain an updated physical address for emergency routing.",
+  },
+  {
+    id: 27,
+    cat: "Support",
+    q: "What support is available?",
+    a: "We provide 24/7 technical support via live chat, email, and phone.",
+  },
+  {
+    id: 28,
+    cat: "Support",
+    q: "Is training provided for staff?",
+    a: "Yes, we offer free onboarding webinars and video tutorials.",
+  },
+  {
+    id: 29,
+    cat: "Support",
+    q: "Do you provide setup assistance?",
+    a: "Yes, our team assists with full setup and configuration for businesses.",
+  },
+  {
+    id: 30,
+    cat: "Support",
+    q: "How fast is your response time?",
+    a: "Most support queries are answered within minutes via live chat.",
+  },
 ];
 
 function FAQCard({ faq, color }) {
