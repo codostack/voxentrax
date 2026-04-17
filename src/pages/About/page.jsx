@@ -1,15 +1,15 @@
 import Aboutheader from "./components/Aboutheader"
-import VoipCommonPage from "../../components/Animationpage"
 import Content3 from "./components/Content1"
 import VoipFeatureDisplay from "../../components/FeatureAnimation"
 import AboutUsContent2 from "./components/Content2"
+import RegistrationPage from "../../components/Contactform"
 
 const AboutPage = () => {
 
   return (
     <div>
 <Aboutheader/>
-<VoipCommonPage/>
+      <RegistrationPage />
 <Content3/>
 <VoipFeatureDisplay/>
 <AboutUsContent2/>

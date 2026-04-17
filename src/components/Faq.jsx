@@ -111,7 +111,7 @@ const styles = `
     align-items: center;
     background: var(--card-bg);
     padding: 10px;
-    border-radius: 100px 24px 24px 100px;
+    border-radius: 10px 10px 10px 10px;
     cursor: pointer;
     transition: all 0.3s ease;
     border: 1px solid var(--border-light);

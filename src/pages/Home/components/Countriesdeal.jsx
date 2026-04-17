@@ -1,190 +1,126 @@
-import React, { useState } from "react";
+import React from "react";
+import {
+  PhoneCall,
+  Headphones,
+  Globe,
+  ShieldCheck,
+  Zap,
+  Server,
+  MessageSquare,
+  Radio,
+} from "lucide-react";
 
-const countries = [
-  { name: "United Kingdom", code: "+44", flag: "https://flagcdn.com/w80/gb.png" },
-  { name: "Canada", code: "+1", flag: "https://flagcdn.com/w80/ca.png" },
-  { name: "Australia", code: "+61", flag: "https://flagcdn.com/w80/au.png" },
-  { name: "Germany", code: "+49", flag: "https://flagcdn.com/w80/de.png" },
-  { name: "France", code: "+33", flag: "https://flagcdn.com/w80/fr.png" },
+/* ───────── SAFE COLOR MAP ───────── */
+const serviceStyles = [
+  {
+    bg: "bg-blue-500",
+    border: "border-blue-200",
+  },
+  {
+    bg: "bg-emerald-500",
+    border: "border-emerald-200",
+  },
+  {
+    bg: "bg-purple-500",
+    border: "border-purple-200",
+  },
+  {
+    bg: "bg-rose-500",
+    border: "border-rose-200",
+  },
+  {
+    bg: "bg-amber-500",
+    border: "border-amber-200",
+  },
+  {
+    bg: "bg-sky-500",
+    border: "border-sky-200",
+  },
+  {
+    bg: "bg-indigo-500",
+    border: "border-indigo-200",
+  },
+  {
+    bg: "bg-teal-500",
+    border: "border-teal-200",
+  },
 ];
 
-export default function CountryScroller() {
-  const [isPaused, setIsPaused] = useState(false);
+const services = [
+  { label: "VoIP Voice Solutions", desc: "High-quality global calling", icon: PhoneCall },
+  { label: "Call Center Platform", desc: "Enterprise support infrastructure", icon: Headphones },
+  { label: "Global Routing", desc: "Smart carrier routing system", icon: Globe },
+  { label: "Secure Communication", desc: "Encrypted voice & data security", icon: ShieldCheck },
+  { label: "Low Latency Network", desc: "Ultra-fast telecom backbone", icon: Zap },
+  { label: "Cloud PBX System", desc: "Scalable business telephony", icon: Server },
+  { label: "SMS Gateway", desc: "Bulk messaging delivery system", icon: MessageSquare },
+  { label: "SIP Trunking", desc: "Carrier-grade connectivity", icon: Radio },
+];
 
+export default function ServicesSection() {
   return (
-    <div
-      style={{
-        position: "relative",
-        overflow: "hidden",
-        paddingTop: "4rem",
-        paddingBottom: "4rem",
-        borderTop: "1px solid rgba(255,255,255,0.1)",
-        borderBottom: "1px solid rgba(255,255,255,0.1)",
-      }}
-    >
-      {/* Background */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          zIndex: 0,
-          background:
-            "linear-gradient(135deg, #065f73 0%, #0891b2 50%, #22d3ee 100%)",
-        }}
-      />
+    <section className="relative w-full py-16 overflow-hidden bg-white">
 
-      {/* Content */}
-      <div style={{ position: "relative", zIndex: 10 }}>
-        {/* Heading */}
-        <div
-          style={{
-            maxWidth: "64rem",
-            margin: "0 auto 4rem",
-            textAlign: "center",
-            padding: "0 1.5rem",
-          }}
-        >
-          <h1
-            style={{
-              color: "#ffffff",
-              fontSize: "2.25rem",
-              fontWeight: 700,
-              marginBottom: "1rem",
-            }}
-          >
-            Transforming Communication with VoIP Technology
-          </h1>
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-50 via-white to-white" />
 
-          <p
-            style={{
-              color: "rgba(207,250,254,0.9)",
-              fontSize: "1.125rem",
-              maxWidth: "36rem",
-              margin: "0 auto",
-            }}
-          >
-            Discover how modern Voice over IP solutions are redefining business
-            communication with speed, clarity, and scalability.
-          </p>
-        </div>
+      {/* header */}
+      <div className="relative max-w-6xl mx-auto px-6 text-center mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-500">
+          Our Communication Services
+        </h2>
+        <p className="mt-3 text-gray-600 text-sm md:text-base max-w-2xl mx-auto">
+          Enterprise-grade VoIP infrastructure, global routing, and secure communication systems built for scale.
+        </p>
+      </div>
 
-        {/* Scroller */}
-        <div
-          style={{
-            background: "rgba(0,0,0,0.15)",
-            borderTop: "1px solid rgba(255,255,255,0.14)",
-            borderBottom: "1px solid rgba(255,255,255,0.14)",
-            backdropFilter: "blur(8px)",
-            paddingTop: "1.5rem",
-            paddingBottom: "1.5rem",
-            overflow: "hidden",
-          }}
-        >
-          {/* ✅ animation controlled here */}
-          <div
-            className="flex gap-6 whitespace-nowrap animate-scroll"
-            style={{
-              animationPlayState: isPaused ? "paused" : "running",
-            }}
-          >
-            {[...countries, ...countries].map((c, i) => (
+      {/* marquee */}
+      <div className="relative">
+        <div className="absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-white to-transparent z-10" />
+        <div className="absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-white to-transparent z-10" />
+
+        <div className="flex w-max animate-scroll gap-6 px-6">
+          {[...services, ...services].map((item, i) => {
+            const Icon = item.icon;
+            const style = serviceStyles[i % serviceStyles.length];
+
+            return (
               <div
                 key={i}
-                onMouseEnter={(e) => {
-                  setIsPaused(true);
-
-                  e.currentTarget.style.transform =
-                    "translateY(-6px) scale(1.08)";
-                  e.currentTarget.style.boxShadow =
-                    "0 18px 40px rgba(0,0,0,0.25)";
-                }}
-                onMouseLeave={(e) => {
-                  setIsPaused(false);
-
-                  e.currentTarget.style.transform =
-                    "translateY(0) scale(1)";
-                  e.currentTarget.style.boxShadow =
-                    "0 6px 20px rgba(0,0,0,0.12)";
-                }}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "1rem",
-                  padding: "1rem 1.5rem",
-                  borderRadius: "0.75rem",
-                  background: "#ffffff",
-                  border: "1px solid rgba(0,0,0,0.08)",
-                  boxShadow: "0 6px 20px rgba(0,0,0,0.12)",
-                  minWidth: "260px",
-                  transition: "all 0.35s ease",
-                  cursor: "pointer",
-                }}
+                className={`min-w-[270px] bg-white border ${style.border} shadow-sm rounded-2xl p-5 flex gap-4 items-start transition-all duration-300 hover:shadow-lg hover:-translate-y-1`}
               >
-                {/* Flag */}
-                <div
-                  style={{
-                    flexShrink: 0,
-                    borderRadius: "6px",
-                    padding: "2px",
-                    background:
-                      "linear-gradient(135deg, rgba(255,255,255,0.55), rgba(255,255,255,0.12))",
-                  }}
-                >
-                  <img
-                    src={c.flag}
-                    alt={c.name}
-                    style={{
-                      width: "3rem",
-                      height: "2rem",
-                      borderRadius: "4px",
-                      objectFit: "cover",
-                    }}
-                  />
+                {/* icon */}
+                <div className={`${style.bg} p-3 rounded-xl text-white`}>
+                  <Icon size={20} />
                 </div>
 
-                <div>
-                  <p
-                    style={{
-                      color: "#0f172a",
-                      fontWeight: 600,
-                      fontSize: "0.875rem",
-                      marginBottom: "0.25rem",
-                    }}
-                  >
-                    {c.name}
+                {/* text */}
+                <div className="text-left">
+                  <h3 className="text-sm font-semibold text-gray-900">
+                    {item.label}
+                  </h3>
+                  <p className="text-xs text-gray-500 mt-1 leading-snug">
+                    {item.desc}
                   </p>
-
-                  <span
-                    style={{
-                      fontSize: "0.75rem",
-                      color: "#0891b2",
-                      background: "#ecfeff",
-                      border: "1px solid #a5f3fc",
-                      padding: "2px 8px",
-                      borderRadius: "6px",
-                      fontFamily: "monospace",
-                    }}
-                  >
-                    {c.code}
-                  </span>
                 </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
 
-      {/* Animations */}
-      <style>{`
-        @keyframes scroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
+      {/* animation */}
+      <style>
+        {`
+          @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
 
-        .animate-scroll {
-          animation: scroll 25s linear infinite;
-        }
-      `}</style>
-    </div>
+          .animate-scroll {
+            animation: scroll 22s linear infinite;
+          }
+        `}
+      </style>
+    </section>
   );
 }

@@ -3,17 +3,25 @@ import { useState } from "react";
 /* ───────────────── DATA ───────────────── */
 const FEATURES = [
   {
-    icon: "🚀",
+    icon: "⚡",
     title: "Lightning Fast Setup",
     desc: "Get your account running in under 2 minutes.",
   },
-];
-
-const STATS = [
-  { val: "50K+", label: "Registered Users" },
-  { val: "99.9%", label: "Uptime Guarantee" },
-  { val: "4.9★", label: "Average Rating" },
-  { val: "180+", label: "Countries" },
+  {
+    icon: "🌐",
+    title: "Global Connectivity",
+    desc: "Connect users across 180+ countries instantly.",
+  },
+  {
+    icon: "🔒",
+    title: "Enterprise Security",
+    desc: "End-to-end encrypted infrastructure by default.",
+  },
+  {
+    icon: "📡",
+    title: "Real-time Communication",
+    desc: "Ultra-low latency voice and data transmission.",
+  },
 ];
 
 /* ───────────────── FIELD ───────────────── */
@@ -30,12 +38,12 @@ function Field({
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <label className="text-xs font-semibold text-gray-600 tracking-wide">
+      <label className="text-xs font-semibold text-gray-500 tracking-wide">
         {label} <span className="text-red-400">*</span>
       </label>
 
-      <div className="relative group">
-        <span className="absolute left-4 top-1/2 -translate-y-1/2 opacity-50">
+      <div className="relative">
+        <span className="absolute left-4 top-1/2 -translate-y-1/2 opacity-60">
           {icon}
         </span>
 
@@ -46,13 +54,13 @@ function Field({
             placeholder={placeholder}
             value={value}
             onChange={onChange}
-            className={`w-full pl-11 pr-4 py-3 text-sm rounded-xl bg-gray-50 border transition-all
+            className={`w-full pl-11 pr-4 py-3 text-sm rounded-xl bg-white border transition-all
             ${
               error
                 ? "border-red-400"
-                : "border-gray-200 focus:border-[#004c4c]"
+                : "border-gray-200 focus:border-blue-400"
             }
-            focus:ring-2 focus:ring-[#004c4c]/20 outline-none`}
+            focus:ring-2 focus:ring-blue-200 outline-none`}
           />
         ) : (
           <input
@@ -61,13 +69,13 @@ function Field({
             placeholder={placeholder}
             value={value}
             onChange={onChange}
-            className={`w-full pl-11 pr-4 py-3 text-sm rounded-xl bg-gray-50 border transition-all
+            className={`w-full pl-11 pr-4 py-3 text-sm rounded-xl bg-white border transition-all
             ${
               error
                 ? "border-red-400"
-                : "border-gray-200 focus:border-[#004c4c]"
+                : "border-gray-200 focus:border-blue-400"
             }
-            focus:ring-2 focus:ring-[#004c4c]/20 outline-none`}
+            focus:ring-2 focus:ring-blue-200 outline-none`}
           />
         )}
       </div>
@@ -80,15 +88,17 @@ function Field({
 /* ───────────────── SUCCESS ───────────────── */
 function SuccessScreen({ name, email }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#004c4c] to-[#002626] flex items-center justify-center">
-      <div className="bg-white rounded-3xl p-16 text-center shadow-2xl max-w-md">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100 flex items-center justify-center">
+      <div className="bg-white rounded-3xl p-14 text-center shadow-xl max-w-md border">
         <span className="text-6xl">🎉</span>
 
-        <h2 className="text-2xl font-extrabold mt-5">You're all set!</h2>
+        <h2 className="text-2xl font-bold mt-5 text-gray-800">
+          You're all set!
+        </h2>
 
         <p className="text-gray-500 mt-3 text-sm leading-7">
           Welcome <strong>{name}</strong>! We'll contact you at{" "}
-          <strong className="text-[#004c4c]">{email}</strong>.
+          <strong className="text-blue-600">{email}</strong>.
         </p>
       </div>
     </div>
@@ -118,8 +128,7 @@ export default function RegistrationPage() {
     if (!form.name.trim()) e.name = "Full name required";
     if (!form.email.includes("@")) e.email = "Invalid email";
     if (!form.phone.trim()) e.phone = "Phone required";
-    if (!form.description.trim())
-      e.description = "Add short description";
+    if (!form.description.trim()) e.description = "Add short description";
     return e;
   };
 
@@ -132,25 +141,22 @@ export default function RegistrationPage() {
     setSubmitted(true);
   };
 
-  if (submitted)
-    return <SuccessScreen name={form.name} email={form.email} />;
+  if (submitted) return <SuccessScreen name={form.name} email={form.email} />;
 
   return (
     <div className="min-h-screen bg-gray-50 relative overflow-hidden">
-
-      {/* BACKGROUND GLOW */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#004c4c22,transparent_60%)]" />
+      {/* soft background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-gray-100" />
 
       <div className="relative max-w-7xl mx-auto px-6 py-14 grid lg:grid-cols-2 gap-12 items-center">
-
+        
         {/* ───────── LEFT SIDE ───────── */}
         <div className="space-y-10">
-
-          {/* HERO */}
+          
           <div>
-            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+            <h1 className="text-4xl text-gray-800 leading-tight">
               Build Faster With{" "}
-              <span className="text-[#004c4c]">Modern Infrastructure</span>
+              <span className="text-blue-600">Modern Infrastructure</span>
             </h1>
 
             <p className="text-gray-500 mt-5 max-w-lg leading-relaxed">
@@ -159,62 +165,52 @@ export default function RegistrationPage() {
             </p>
           </div>
 
-          {/* STATS */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {STATS.map((s, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center hover:shadow-md transition"
-              >
-                <div className="text-xl font-extrabold text-[#004c4c]">
-                  {s.val}
-                </div>
-                <div className="text-xs text-gray-400 mt-1">
-                  {s.label}
-                </div>
-              </div>
-            ))}
-          </div>
 
-          {/* FEATURES */}
-          <div className="bg-white rounded-2xl border p-6 shadow-sm">
-            <h3 className="font-bold text-gray-900 mb-4">
-              Why people choose us
-            </h3>
+{/* FEATURES */}
+<div className="bg-white rounded-2xl border shadow-sm p-6">
+  <h3 className="text-lg font-bold text-gray-800 mb-5">
+    Why people choose us
+  </h3>
 
-            {FEATURES.map((f, i) => (
-              <div key={i} className="flex gap-4">
-                <div className="w-11 h-11 rounded-xl bg-[#004c4c]/10 flex items-center justify-center">
-                  {f.icon}
-                </div>
-                <div>
-                  <div className="font-medium text-gray-800">
-                    {f.title}
-                  </div>
-                  <div className="text-sm text-gray-400">
-                    {f.desc}
-                  </div>
-                </div>
-              </div>
-            ))}
+  <div className="grid sm:grid-cols-2 gap-5">
+    {FEATURES.map((f, i) => (
+      <div
+        key={i}
+        className="flex items-start gap-4 p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:shadow-md transition bg-white"
+      >
+        {/* icon */}
+        <div className="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 text-lg">
+          {f.icon}
+        </div>
+
+        {/* text */}
+        <div>
+          <div className="font-semibold text-gray-800">
+            {f.title}
           </div>
+          <div className="text-sm text-gray-500 mt-1 leading-snug">
+            {f.desc}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
         </div>
 
         {/* ───────── FORM CARD ───────── */}
-        <div className="bg-white rounded-3xl border border-gray-100 shadow-2xl p-10">
-
-          <h2 className="text-2xl font-extrabold mb-6">
+        <div className="bg-white rounded-3xl border shadow-xl p-10">
+          
+          <h2 className="text-2xl font-bold mb-6 text-gray-800">
             Create Free Account
           </h2>
 
           <div className="space-y-5">
-
+            
             <div className="grid sm:grid-cols-2 gap-4">
               <Field
                 label="Full Name"
                 name="name"
-                icon="👤"
-                placeholder="John Doe"
                 value={form.name}
                 onChange={handleChange}
                 error={errors.name}
@@ -224,8 +220,6 @@ export default function RegistrationPage() {
                 label="Email"
                 name="email"
                 type="email"
-                icon="✉️"
-                placeholder="john@email.com"
                 value={form.email}
                 onChange={handleChange}
                 error={errors.email}
@@ -235,19 +229,15 @@ export default function RegistrationPage() {
             <Field
               label="Phone"
               name="phone"
-              icon="📞"
-              placeholder="+1 555 000"
               value={form.phone}
               onChange={handleChange}
               error={errors.phone}
             />
 
             <Field
-              label="About You"
+              label="Message"
               name="description"
-              icon="💬"
-              textarea
-              placeholder="Tell us about your project..."
+               textarea
               value={form.description}
               onChange={handleChange}
               error={errors.description}
@@ -257,16 +247,10 @@ export default function RegistrationPage() {
               onClick={handleSubmit}
               onMouseEnter={() => setHoverBtn(true)}
               onMouseLeave={() => setHoverBtn(false)}
-              className="w-full py-4 rounded-2xl text-white font-semibold bg-gradient-to-r from-[#004c4c] to-[#002626] hover:shadow-xl hover:-translate-y-0.5 transition-all"
+              className="w-full py-4 rounded-2xl text-white font-semibold bg-blue-600 hover:bg-blue-700 hover:shadow-lg transition-all"
             >
               {hoverBtn ? "✨ Let's Go →" : "Create My Free Account"}
             </button>
-
-            <div className="flex justify-center gap-6 text-xs text-gray-400 pt-2">
-              <span>🔒 SSL Secured</span>
-              <span>🛡 No Spam</span>
-              <span>✅ Free Forever</span>
-            </div>
 
           </div>
         </div>

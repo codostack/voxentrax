@@ -1,9 +1,9 @@
 import VoipFAQ from "../../components/Faq";
-import Aboutcontent from "./components/Aboutcontent";
 import Content1 from "./components/Content1";
 import Countriesdeal from "./components/Countriesdeal";
 import Ourservices from "./components/Ourservices";
 import VoipHeader from "./components/Header";
+import RegistrationPage from "../../components/Contactform";
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
       <VoipHeader />
       <Countriesdeal />
       <Content1 />
-      <Aboutcontent />
+      <RegistrationPage />
       <Ourservices />
       <VoipFAQ />
     </div>
