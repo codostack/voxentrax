@@ -10,12 +10,17 @@ import FAQ from "../pages/Faq/page";
 import RateTable from "../pages/Rate/page";
 import PopupRateTable from "../pages/Rate/popup";
 import NotFound from "../components/NotFound";
+import WhatsAppButton from "../components/WhatsAppButton";
 
 const PublicRoutes = () => {
   return (
     <>
       <Navbar />
       <PopupRateTable />
+      <WhatsAppButton
+        phone="0000000000000"          // your number with country code (no +)
+        message="Hi! I’m interested in your services"
+      />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
