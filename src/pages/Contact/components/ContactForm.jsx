@@ -1,188 +1,258 @@
+import {
+  Zap,
+  ShieldCheck,
+  Globe,
+  BarChart3,
+  Headphones,
+  Mail,
+  Phone,
+  MapPin,
+} from "lucide-react";
+
 export default function ContactForm() {
-  const BRAND = "#0891b2";        // NEW MAIN COLOR
-  const BRAND_LIGHT = "#cffafe";  // light cyan focus glow
+  const BLUE = "#1058A7";
+  const ORANGE = "#F97316";
+
+  const inputStyle = {
+    width: "100%",
+    background: "#f8fafc",
+    border: "1px solid #e2e8f0",
+    borderRadius: "8px",
+    padding: "10px 14px",
+    fontSize: "13px",
+    color: "#1e293b",
+    outline: "none",
+    marginTop: "5px",
+    transition: "all 0.2s",
+  };
+
+  const labelStyle = {
+    fontSize: "11px",
+    fontWeight: "500",
+    letterSpacing: "0.05em",
+    textTransform: "uppercase",
+    color: "#64748b",
+    marginBottom: "5px",
+  };
+
+  const handleFocus = (e) => {
+    e.target.style.borderColor = BLUE;
+    e.target.style.background = "#fff";
+    e.target.style.boxShadow = `0 0 0 2px rgba(16,88,167,0.15)`;
+  };
+
+  const handleBlur = (e) => {
+    e.target.style.borderColor = "#e2e8f0";
+    e.target.style.background = "#f8fafc";
+    e.target.style.boxShadow = "none";
+  };
+
+  const features = [
+    { label: "99.9% Network Uptime", icon: Zap, border: "#f97316" },
+    { label: "Enterprise-Grade Security", icon: ShieldCheck, border: "#22c55e" },
+    { label: "Global Coverage & Support", icon: Globe, border: "#38bdf8" },
+    { label: "AI Call Analytics", icon: BarChart3, border: "#a855f7" },
+    { label: "24/7 Customer Support", icon: Headphones, border: "#f43f5e" },
+  ];
+
+  const contacts = [
+    { text: "mail@example.com", icon: Mail },
+    { text: "+123-456-7890", icon: Phone },
+    { text: "New York, USA", icon: MapPin },
+  ];
+
+  const fields = [
+    { label: "Full Name", placeholder: "Enter your full name", full: false },
+    { label: "Location", placeholder: "Where are you located?", full: false },
+    { label: "Email", placeholder: "Enter your email address", full: false },
+    { label: "Phone Number", placeholder: "Your phone number", full: false },
+    { label: "Subject", placeholder: "What's this about?", full: true },
+  ];
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center px-6 py-16"
       style={{
-        background:
-          "linear-gradient(180deg, #f0f9ff 0%, #ffffff 60%, #ecfeff 100%)",
+        width: "100%",
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "#ffffff",
+        padding: "20px",
       }}
     >
-      <div className="max-w-6xl w-full grid lg:grid-cols-2 rounded-3xl overflow-hidden shadow-2xl">
+      {/* OUTER CARD */}
+      <div
+        style={{
+          width: "100%",
+          maxWidth: "100vw",
+          border: "1px solid #e2e8f0",
+          borderRadius: "16px",
+          overflow: "hidden",
+          boxShadow: "0 10px 40px rgba(0,0,0,0.08)",
+          background: "#fff",
+        }}
+      >
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.3fr" }}>
 
-        {/* LEFT SIDE */}
-        <div
-          className="relative p-12 text-white flex flex-col justify-between overflow-hidden"
-          style={{
-            background:
-              "linear-gradient(135deg, #075985 0%, #0891b2 50%, #06b6d4 80%, #67e8f9 100%)",
-          }}
-        >
-          {/* Glow Effects */}
-          <div className="absolute -top-20 -left-20 w-72 h-72 bg-white/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 right-0 w-72 h-72 bg-white/10 rounded-full blur-3xl"></div>
-
-          {/* CONTENT */}
-          <div className="relative z-10">
-            <p className="uppercase tracking-widest text-white/70 text-xs font-bold mb-4">
-              CONTACT US
-            </p>
-
-            <h2 className="text-4xl font-black leading-tight mb-6">
-              Let's Build Better
-              <br />
-              Communication Together
-            </h2>
-
-            <p className="text-white/80 leading-relaxed max-w-md">
-              Our VoIP experts help businesses deploy scalable,
-              secure, and crystal-clear communication systems worldwide.
-            </p>
-
-            {/* FEATURES */}
-            <div className="mt-10 space-y-4">
-              <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-xl px-4 py-3">
-                <span className="text-xl">⚡</span>
-                <p className="text-sm">99.9% Network Uptime</p>
-              </div>
-
-              <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-xl px-4 py-3">
-                <span className="text-xl">🔒</span>
-                <p className="text-sm">Enterprise-Grade Security</p>
-              </div>
-
-              <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-xl px-4 py-3">
-                <span className="text-xl">🌍</span>
-                <p className="text-sm">Global Coverage & Support</p>
-              </div>
-            </div>
-          </div>
-
-          {/* OFFER CARD */}
-          <div className="relative z-10 mt-12">
-            <div
-              className="rounded-2xl p-6"
-              style={{
-                background: "rgba(255,255,255,0.12)",
-                border: "1px solid rgba(255,255,255,0.2)",
-                backdropFilter: "blur(12px)",
-              }}
-            >
-              <span
-                className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4"
-                style={{
-                  background: "rgba(255,255,255,0.2)",
-                  color: "#ecfeff",
-                }}
-              >
-                🎉 Limited Time Offer
-              </span>
-
-              <h4 className="text-xl font-extrabold text-white mb-2">
-                Start Free for 30 Days
-              </h4>
-
-              <p className="text-white/75 text-sm mb-5">
-                No credit card required. Get full access to HD calling,
-                analytics, and 24/7 support.
+          {/* LEFT */}
+          <div
+            style={{
+              background: "linear-gradient(135deg, #1058A7 0%, #0b3c7a 100%)",
+              padding: "2rem",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
+            <div>
+              <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.6)" }}>
+                CONTACT US
               </p>
 
-              <div className="flex gap-4 mb-5">
-                <div className="text-center">
-                  <p className="text-2xl font-black text-white">5K+</p>
-                  <p className="text-white/60 text-xs">Businesses</p>
-                </div>
-
-                <div className="w-px bg-white/20"></div>
-
-                <div className="text-center">
-                  <p className="text-2xl font-black text-white">50+</p>
-                  <p className="text-white/60 text-xs">Countries</p>
-                </div>
-
-                <div className="w-px bg-white/20"></div>
-
-                <div className="text-center">
-                  <p className="text-2xl font-black text-white">4.9★</p>
-                  <p className="text-white/60 text-xs">Rated</p>
-                </div>
-              </div>
-
-              <button
-                className="w-full py-3 rounded-xl font-bold transition-all hover:scale-[1.02]"
+              <h2
                 style={{
-                  background: "#ffffff",
-                  color: BRAND,
+                  fontSize: "34px",
+                  fontWeight: "600",
+                  letterSpacing: "-0.5px",
+                  color: "#fff",
+                  margin: "10px 0",
                 }}
               >
-                Get Started for Free →
-              </button>
+                Let's Build{" "}
+                <span style={{ color: ORANGE }}>
+                  Better Communication
+                </span>
+              </h2>
+
+              <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.75)" }}>
+                Scalable, secure, and clear communication solutions.
+              </p>
+
+              {/* FEATURES */}
+              <div style={{ marginTop: "20px", display: "flex", flexDirection: "column", gap: "10px" }}>
+                {features.map((f, i) => {
+                  const Icon = f.icon;
+                  return (
+                    <div
+                      key={i}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "14px",
+                        background: "rgba(255,255,255,0.08)",
+                        padding: "12px 14px",
+                        borderRadius: "10px",
+                        border: `1px solid ${f.border}`,
+                        color: "#fff",
+                        fontSize: "13px",
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: "36px",
+                          height: "36px",
+                          borderRadius: "10px",
+                          background: f.border,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Icon size={18} color="#fff" />
+                      </div>
+
+                      {f.label}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* CONTACTS */}
+            <div
+              style={{
+                marginTop: "20px",
+                display: "flex",
+                justifyContent: "space-between",
+                gap: "10px",
+              }}
+            >
+              {contacts.map((c, i) => {
+                const Icon = c.icon;
+                return (
+                  <div
+                    key={i}
+                    style={{
+                      flex: 1,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "8px",
+                      background: "rgba(255,255,255,0.1)",
+                      padding: "8px 10px",
+                      borderRadius: "8px",
+                      color: "#fff",
+                      fontSize: "12px",
+                    }}
+                  >
+                    <Icon size={16} />
+                    {c.text}
+                  </div>
+                );
+              })}
             </div>
           </div>
-        </div>
 
-        {/* RIGHT SIDE FORM */}
-        <div className="bg-white p-12">
-          <h3 className="text-3xl font-bold text-gray-900 mb-8">
-            Send a Message
-          </h3>
+          {/* RIGHT */}
+          <div style={{ padding: "2rem" }}>
+            <h3 style={{ fontSize: "20px", color: BLUE, marginBottom: "1rem", fontWeight: "600" }}>
+              Send a Message
+            </h3>
 
-          <form className="space-y-6">
-            {["Name", "Email", "Subject", "Phone Number"].map((label, i) => (
-              <div key={i}>
-                <label className="text-sm font-semibold text-gray-600">
-                  {label}
-                </label>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+              {fields.map((f, i) => (
+                <div key={i} style={{ gridColumn: f.full ? "1/-1" : "auto" }}>
+                  <label style={labelStyle}>{f.label}</label>
+                  <input
+                    type="text"
+                    placeholder={f.placeholder}
+                    style={inputStyle}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                  />
+                </div>
+              ))}
 
-                <input
-                  type="text"
-                  placeholder={label}
-                  className="w-full mt-2 px-4 py-3 rounded-xl border border-gray-200 outline-none transition"
-                  onFocus={(e) => {
-                    e.target.style.borderColor = BRAND;
-                    e.target.style.boxShadow = `0 0 0 2px ${BRAND_LIGHT}`;
-                  }}
-                  onBlur={(e) => {
-                    e.target.style.borderColor = "#e5e7eb";
-                    e.target.style.boxShadow = "none";
-                  }}
+              <div style={{ gridColumn: "1/-1" }}>
+                <label style={labelStyle}>Message</label>
+                <textarea
+                  rows={3}
+                  style={inputStyle}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
                 />
               </div>
-            ))}
-
-            <div>
-              <label className="text-sm font-semibold text-gray-600">
-                Message
-              </label>
-
-              <textarea
-                rows="4"
-                placeholder="Write your message..."
-                className="w-full mt-2 px-4 py-3 rounded-xl border border-gray-200 resize-none outline-none transition"
-                onFocus={(e) => {
-                  e.target.style.borderColor = BRAND;
-                  e.target.style.boxShadow = `0 0 0 2px ${BRAND_LIGHT}`;
-                }}
-                onBlur={(e) => {
-                  e.target.style.borderColor = "#e5e7eb";
-                  e.target.style.boxShadow = "none";
-                }}
-              />
             </div>
 
             <button
-              type="submit"
-              className="w-full py-3 rounded-xl font-bold text-white transition-all shadow-lg hover:scale-[1.02]"
               style={{
-                background:
-                  "linear-gradient(135deg, #075985 0%, #0891b2 60%, #06b6d4 100%)",
+                width: "100%",
+                marginTop: "18px",
+                padding: "12px",
+                borderRadius: "8px",
+                border: "none",
+                background: "linear-gradient(135deg, #f97316, #ea580c)",
+                color: "#fff",
+                fontSize: "14px",
+                fontWeight: "600",
+                cursor: "pointer",
+                boxShadow: "0 6px 20px rgba(249,115,22,0.35)",
               }}
             >
-              Send Message 🚀
+              Send Message 
             </button>
-          </form>
+          </div>
         </div>
       </div>
     </div>

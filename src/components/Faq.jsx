@@ -57,7 +57,7 @@ const styles = `
   }
   
   .faq-eyebrow {
-    color: var(--color-1);
+  color: #6b7280; /* light blue */
     font-weight: 700;
     font-size: 12px; /* Slightly smaller for better contrast with title */
     text-transform: uppercase;
@@ -69,7 +69,7 @@ const styles = `
 
   .faq-title {
     font-size: clamp(24px, 4vw, 32px);
-    color: #9ED3DC; /* Kept your specific blue */
+    color: #f4944f; /* Kept your specific blue */
     font-weight: 600; /* Increased weight slightly for "Professional" look */
     line-height: 1.3;
     letter-spacing: -0.2px;
@@ -117,13 +117,12 @@ const styles = `
     border: 1px solid var(--border-light);
   }
 
-  .faq-nav-item.active {
-    background: #fff;
-    border-color: var(--active-color);
-    transform: translateX(8px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
-  }
-
+.faq-nav-item.active {
+  background: #fff;
+  border-color: #3b82f6; /* blue-500 */
+  transform: translateX(8px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+}
   .faq-nav-circle {
     width: 48px;
     height: 48px;

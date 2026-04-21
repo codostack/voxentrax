@@ -593,7 +593,7 @@ export default function RegistrationPage() {
                 value={form.name}
                 onChange={handleChange}
                 className="w-full text-[13px] px-3 py-2 rounded-md outline-none bg-blue-50 text-slate-900"
-                style={{ border: errors.name ? "1px solid #ef4444" : "1px solid #93c5fd" }}
+                style={{ border: errors.name ? "1px solid #ef4444" : "1px solid #73aff4" }}
               />
               {errors.name && <span className="text-[11px] text-red-500 mt-1">{errors.name}</span>}
               <div className="h-3" />

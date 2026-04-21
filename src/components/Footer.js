@@ -8,23 +8,23 @@ import {
   FaEnvelope,
   FaMapMarkerAlt,
 } from "react-icons/fa";
-// Import your logo as before
 import logo from "../assets/logo footer12.jpg";
 
 const footerLinks = {
   Services: [
-    "Cloud PBX Solutions",
+    "VoIP Calling",
     "SIP Trunking",
-    "Virtual Phone Numbers",
-    "IVR Systems",
+    "Call Routing",
+    "Call Analytics",
     "International Calling",
   ],
   Company: [
-    "About Voxentrax",
-    "Our Network",
-    "Success Stories",
-    "Latest News",
-    "Contact Sales",
+    "Home",
+    "About",
+    "Services",
+    "Rate",
+    "Contact Us",
+        "Faq",
   ],
   Legal: [
     "Privacy Policy",
@@ -38,7 +38,7 @@ const footerLinks = {
 const telecomFeatures = [
   { icon: "📡", title: "99.99% Uptime", sub: "Carrier-grade reliability" },
   { icon: "🔒", title: "Secure Voice", sub: "End-to-end encryption" },
-  { icon: "🌍", title: "Global Reach", sub: "Presence in 120+ countries" },
+  { icon: "🌍", title: "Global Reach", sub: "providing Services in 20+ countries" },
   { icon: "⚡", title: "Low Latency", sub: "Edge-optimized routing" },
 ];
 
@@ -46,7 +46,7 @@ export default function TelecomFooter() {
   const [email, setEmail] = useState("");
 
   return (
-    <footer className="relative bg-[#0f172a] text-white pt-16 pb-8 overflow-hidden font-sans">
+    <footer className="relative bg-blue-900 text-white pt-16 pb-8 overflow-hidden font-sans">
       {/* Subtle Background Infographic Pattern (Inspired by Image 2) */}
       <div className="absolute top-0 right-0 w-1/3 h-full opacity-5 pointer-events-none">
         <div className="absolute top-10 right-[-50px] w-64 h-64 border-[40px] border-orange-500 rounded-full" />
@@ -55,13 +55,13 @@ export default function TelecomFooter() {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Top Feature Bar (Telecom Infographic Style) */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 mb-12 border-b border-gray-800">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 mb-12">
           {telecomFeatures.map((feat, i) => (
             <div
               key={i}
               className="flex items-center gap-4 group transition-all duration-300"
             >
-              <div className="w-12 h-12 flex items-center justify-center bg-gray-800 rounded-2xl group-hover:bg-orange-500 transition-colors duration-300 text-2xl">
+              <div className="w-12 h-12 flex items-center justify-center bg-blue-900 rounded-2xl group-hover:bg-blue-900 transition-colors duration-300 text-2xl">
                 {feat.icon}
               </div>
               <div>
@@ -78,18 +78,18 @@ export default function TelecomFooter() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Brand & Newsletter Section */}
           <div className="lg:col-span-4">
- <div className="inline-block bg-white p-3 rounded-2xl shadow-xl">
-    <img
-      src={logo}
-      alt="Voxentrax"
-      className="w-[380px] md:w-[520px] h-[90px] object-contain"
-    />
-  </div>
+            <div className="inline-block bg-white p-3 rounded-2xl shadow-xl">
+              <img
+                src={logo}
+                alt="Voxentrax"
+                className="w-[380px] md:w-[520px] h-[90px] object-contain"
+              />
+            </div>
 
-  <p className="text-gray-400 text-sm leading-relaxed mb-8 max-w-md mt-4">
-    Empowering global enterprises with next-generation VoIP
-    infrastructure and seamless communication APIs.
-  </p>
+            <p className="text-gray-400 text-sm leading-relaxed mb-8 max-w-md mt-4">
+              Empowering global enterprises with next-generation VoIP
+              infrastructure and seamless communication APIs.
+            </p>
 
             <h4 className="text-sm font-bold uppercase tracking-widest mb-4">
               Stay Updated
@@ -98,7 +98,7 @@ export default function TelecomFooter() {
               <input
                 type="email"
                 placeholder="Enter your business email"
-                className="bg-gray-900 border border-gray-800 px-4 py-3 rounded-l-lg w-full focus:outline-none focus:border-cyan-500 text-sm"
+                className="bg-white border border-gray-800 px-4 py-3 rounded-l-lg w-full focus:outline-none focus:border-cyan-500 text-sm"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -118,11 +118,11 @@ export default function TelecomFooter() {
                 <ul className="space-y-4">
                   {links.map((link) => (
                     <li key={link}>
-                   <button
-  className="text-gray-400 hover:text-cyan-400 text-sm transition-colors duration-200 block text-left"
->
-  {link}
-</button>
+                      <button
+                        className="text-gray-400 hover:text-cyan-400 text-sm transition-colors duration-200 block text-left"
+                      >
+                        {link}
+                      </button>
                     </li>
                   ))}
                 </ul>
@@ -155,47 +155,48 @@ export default function TelecomFooter() {
 
             <div className="flex gap-4 mt-8">
               {[
-                <FaLinkedinIn />,
-                <FaTwitter />,
-                <FaFacebookF />,
-                <FaWhatsapp />,
+                <FaLinkedinIn size={25} />,
+                <FaTwitter size={25} />,
+                <FaFacebookF size={25} />,
+                <FaWhatsapp size={25} />,
               ].map((link, i) => (
-            <button
-  className="text-gray-400 hover:text-cyan-400 text-sm transition-colors duration-200 block text-left"
->
-  {link}
-</button>
+                <button
+                  key={i}
+                  className="text-gray-400 hover:text-cyan-400 transition-all duration-200 flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/10"
+                >
+                  {link}
+                </button>
               ))}
             </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-<div className="mt-16 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
-  
-  <p>© 2026 Voxentrax Telecom Systems. All rights reserved.</p>
+        <div className="mt-16 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
 
-  <div className="flex items-center gap-6 flex-wrap justify-center">
-    <span className="flex items-center gap-1">
-      <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-      System Status: Operational
-    </span>
+          <p>© 2026 Voxentrax Telecom Systems. All rights reserved.</p>
 
-    {/* Powered by */}
-    <span className="text-gray-500">
-      Powered by{" "}
-<a
-  href="https://codostack.com"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="text-cyan-400 font-medium hover:underline"
->
-  Codostack
-</a>
-    </span>
-  </div>
+          <div className="flex items-center gap-6 flex-wrap justify-center">
+            <span className="flex items-center gap-1">
+              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+              System Status: Operational
+            </span>
 
-</div>
+            {/* Powered by */}
+            <span className="text-gray-500">
+              Powered by{" "}
+              <a
+                href="https://codostack.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-cyan-400 font-medium hover:underline"
+              >
+                Codostack
+              </a>
+            </span>
+          </div>
+
+        </div>
       </div>
     </footer>
   );
