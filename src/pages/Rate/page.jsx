@@ -107,7 +107,7 @@ const RateTable = ({ selectionMode = false }) => {
       {/* Tabs + Filters */}
       <div className="flex justify-between items-center mb-4">
         <div className="flex gap-2">
-          <button className="bg-blue-500 text-white px-4 py-2 rounded h-[40px]">
+          <button className="bg-blue-900 text-white px-4 py-2 rounded h-[40px]">
             CLI Voice Routes
           </button>
         </div>
@@ -139,7 +139,7 @@ const RateTable = ({ selectionMode = false }) => {
 
       {/* Table */}
       <table className="min-w-full border rounded overflow-hidden">
-        <thead className="bg-blue-500 text-white">
+        <thead className="bg-blue-900 text-white">
           <tr>
             {selectionMode && <th className="px-4 py-3"></th>}
             <th className="px-4 py-3 text-left">Country Code</th>
