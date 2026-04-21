@@ -2,13 +2,14 @@ import VoipFAQ from "../../components/Faq";
 import Content1 from "./components/Content1";
 import Ourservices from "./components/Ourservices";
 import VoipHeader from "./components/Header";
-import RegistrationPage from "../../components/Contactform";
+import WorldMap from "./components/WorldMap";
+import RegistrationPage from "./components/Aboutcontent";
 
 export default function Home() {
   return (
     <div>
       <VoipHeader />
-      {/* <Countriesdeal /> */}
+      <WorldMap />
       <Content1 />
       <RegistrationPage />
       <Ourservices />

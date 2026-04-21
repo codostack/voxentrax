@@ -8,10 +8,10 @@ export default function Services() {
   return (
     <div>
       <VoipHeader />
-      <RegistrationPage />
       <Content4 />
       <VoipFeatures />
       <ServiceContent2 />
+            <RegistrationPage />
     </div>
   );
 }

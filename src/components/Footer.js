@@ -171,15 +171,31 @@ export default function TelecomFooter() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-gray-800 flex flex-col md:row justify-between items-center gap-4 text-xs text-gray-500">
-          <p>© 2026 Voxentrax Telecom Systems. All rights reserved.</p>
-          <div className="flex gap-6">
-            <span className="flex items-center gap-1">
-              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-              System Status: Operational
-            </span>
-          </div>
-        </div>
+<div className="mt-16 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+  
+  <p>© 2026 Voxentrax Telecom Systems. All rights reserved.</p>
+
+  <div className="flex items-center gap-6 flex-wrap justify-center">
+    <span className="flex items-center gap-1">
+      <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+      System Status: Operational
+    </span>
+
+    {/* Powered by */}
+    <span className="text-gray-500">
+      Powered by{" "}
+<a
+  href="https://codostack.com"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="text-cyan-400 font-medium hover:underline"
+>
+  Codostack
+</a>
+    </span>
+  </div>
+
+</div>
       </div>
     </footer>
   );

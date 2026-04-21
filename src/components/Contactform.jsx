@@ -202,7 +202,7 @@ export default function RegistrationPage() {
         <div className="bg-white rounded-3xl border shadow-xl p-10">
           
           <h2 className="text-2xl font-bold mb-6 text-gray-800">
-            Create Free Account
+            Request a Free Demo
           </h2>
 
           <div className="space-y-5">
