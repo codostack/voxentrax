@@ -68,6 +68,8 @@ const REGIONS = {
 
 const SVG_W = 960;
 const SVG_H = 480;
+const VB_W = SVG_W;          // viewBox width
+const VB_H = SVG_H - 110;    // viewBox height (matches the rendered SVG)
 const MAX_ACTIVE = 5;
 const POPUP_LIFETIME = 5800;
 const TICK_MS = 1600;
@@ -140,7 +142,7 @@ function Popup({ country, visible, position }) {
 
   return (
     <div
-      className="absolute pointer-events-none z-20"
+      className="wm-popup absolute pointer-events-none z-20"
       style={{
         left: position.left,
         top: position.top,
@@ -153,7 +155,7 @@ function Popup({ country, visible, position }) {
       }}
     >
       <div
-        className="bg-white border border-orange-500 flex items-center gap-2.5"
+        className="wm-popup-card bg-white border border-orange-500 flex items-center gap-2.5"
         style={{
           padding: "8px 12px",
           boxShadow: "0 4px 18px rgba(37,99,235,0.12)",
@@ -166,6 +168,7 @@ function Popup({ country, visible, position }) {
           onError={(e) => {
             e.target.src = `https://via.placeholder.com/40x25?text=${country.code}`;
           }}
+          className="wm-popup-flag"
           style={{
             width: 28,
             height: 20,
@@ -175,6 +178,7 @@ function Popup({ country, visible, position }) {
         />
         <div className="flex flex-col gap-0.5 flex-1">
           <span
+            className="wm-popup-name"
             style={{
               fontSize: 13,
               fontWeight: 600,
@@ -185,6 +189,7 @@ function Popup({ country, visible, position }) {
             {country.name}
           </span>
           <span
+            className="wm-popup-dial"
             style={{
               fontSize: 11,
               fontFamily: "monospace",
@@ -225,13 +230,35 @@ function WorldPaths({ paths }) {
 export default function WorldMap() {
   const [mapPath, setMapPath] = useState("");
   const [popups, setPopups] = useState({});
+  const [, forceTick] = useState(0); // re-render on resize so popup positions recompute
   const containerRef = useRef(null);
+  const svgRef = useRef(null);
   const queueRef = useRef(buildQueue());
   const qIdxRef = useRef(0);
   const timersRef = useRef({});
   const byCode = useRef(
     Object.fromEntries(COUNTRIES_WITH_FLAGS.map((c) => [c.code, c])),
   );
+const [isMobile, setIsMobile] = useState(false);
+
+useEffect(() => {
+  const check = () => setIsMobile(window.innerWidth < 768);
+  check();
+  window.addEventListener("resize", check);
+  return () => window.removeEventListener("resize", check);
+}, []);
+
+  // Recompute popup placement on viewport resize
+  useEffect(() => {
+    const onResize = () => forceTick((n) => n + 1);
+    window.addEventListener("resize", onResize);
+    // One extra re-render after first paint so refs are populated
+    const id = requestAnimationFrame(() => forceTick((n) => n + 1));
+    return () => {
+      window.removeEventListener("resize", onResize);
+      cancelAnimationFrame(id);
+    };
+  }, []);
 
   // Load world-atlas + topojson
   useEffect(() => {
@@ -305,7 +332,6 @@ export default function WorldMap() {
   }, []);
 
   const hidePopup = useCallback((code) => {
-    // ✅ Fix: copy timersRef.current into local variable before use in closure
     const timers = timersRef.current;
     clearTimeout(timers[code]);
     setPopups((prev) => {
@@ -380,7 +406,6 @@ export default function WorldMap() {
     [0, 700, 1400, 2100, 2800].forEach((d) => setTimeout(tick, d));
     const id = setInterval(tick, TICK_MS);
 
-    // ✅ Fix: capture timersRef.current in a local variable for cleanup
     const timers = timersRef.current;
     return () => {
       clearInterval(id);
@@ -390,31 +415,64 @@ export default function WorldMap() {
 
   const activeCount = Object.keys(popups).length;
 
-  // ── NO OVERLAP POSITION SYSTEM ──
   const popupPositions = (() => {
-    const placed = [];
     const positions = {};
-    const GAP = 10;
-    const W = 190;
-    const H = 60;
+    const placed = [];
+    const GAP = 8;
 
-    if (!containerRef.current) return {};
+    const container = containerRef.current;
+    const svg = svgRef.current;
+    if (!container || !svg) return {};
 
-    const rect = containerRef.current.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+    const svgRect = svg.getBoundingClientRect();
+
+    // Mobile vs desktop popup footprint — keeps the no-overlap math sane on small screens
+    const isSmall = containerRect.width < 640;
+    const W = isSmall ? 122 : 190;
+    const H = isSmall ? 40 : 60;
+    const TAIL_GAP = isSmall ? 10 : 16;
+
+    if (svgRect.width === 0 || svgRect.height === 0) return {};
+
+    const scale = Math.min(svgRect.width / VB_W, svgRect.height / VB_H);
+    const renderedW = VB_W * scale;
+    const renderedH = VB_H * scale;
+    const offX = (svgRect.width - renderedW) / 2;
+    const offY = (svgRect.height - renderedH) / 2;
+
+    // SVG's offset within container
+    const svgOffsetX = svgRect.left - containerRect.left;
+    const svgOffsetY = svgRect.top - containerRect.top;
 
     Object.values(popups).forEach(({ country, visible }) => {
       if (!visible) return;
 
-      const [x, y] = project(country.lon, country.lat);
+      const [vx, vy] = project(country.lon, country.lat);
+      // Skip points that fall outside the visible viewBox crop
+      if (vy > VB_H) return;
 
-      let left = (x / SVG_W) * rect.width - W / 2;
-      let top = (y / SVG_H) * rect.height - H - 16;
+      // Where the dot actually paints, in container-local pixels
+      const dotX = svgOffsetX + offX + vx * scale;
+      const dotY = svgOffsetY + offY + vy * scale;
 
-      left = Math.max(4, Math.min(rect.width - W - 4, left));
-      top = Math.max(4, top);
+      // Center the popup horizontally above the dot; tail points down at it
+      let left = dotX - W / 2;
+      let top = dotY - H - TAIL_GAP;
 
+      // If there's no room above, flip below the dot
+      if (top < 4) {
+        top = dotY + TAIL_GAP;
+      }
+
+      // Clamp horizontally inside the container
+      left = Math.max(4, Math.min(containerRect.width - W - 4, left));
+      top = Math.max(4, Math.min(containerRect.height - H - 4, top));
+
+      // Avoid overlap with already-placed popups
       let collision = true;
-      while (collision) {
+      let guard = 0;
+      while (collision && guard++ < 50) {
         collision = false;
         for (const p of placed) {
           if (
@@ -424,6 +482,10 @@ export default function WorldMap() {
             top += H + GAP;
             collision = true;
           }
+        }
+        if (top + H + 4 > containerRect.height) {
+          top = Math.max(4, dotY - H - TAIL_GAP);
+          break;
         }
       }
 
@@ -437,9 +499,76 @@ export default function WorldMap() {
 
   return (
     <>
+      <style>{`
+        /* ===== Responsive overrides — desktop view unchanged ===== */
+        /* Tablet */
+        @media (max-width: 1023px) {
+          .wm-title { font-size: 28px !important; }
+          .wm-svg { height: 520px !important; }
+          .wm-active-list { left: 16px !important; top: auto !important; bottom: 12px !important; }
+        }
+        /* Mobile */
+        @media (max-width: 767px) {
+          .wm-header { min-height: 72px !important; padding: 8px 12px !important; }
+          .wm-title { font-size: 20px !important; letter-spacing: 0.04em !important; }
+          .wm-container { min-height: 320px !important; }
+          .wm-svg { height: 360px !important; }
+          .wm-live-badge span { font-size: 9px !important; }
+          .wm-active-badge span {
+            font-size: 9px !important;
+            padding: 2px 7px !important;
+          }
+          .wm-active-list {
+            left: 10px !important;
+            right: 10px !important;
+            top: auto !important;
+            bottom: 8px !important;
+            max-height: 110px !important;
+            overflow-y: auto !important;
+          }
+          .wm-active-list-inner {
+            flex-direction: row !important;
+            flex-wrap: wrap !important;
+            gap: 4px !important;
+          }
+          .wm-active-list-item {
+            padding: 2px 6px !important;
+            background: rgba(255,255,255,0.08);
+            border-radius: 6px;
+            font-size: 10px !important;
+          }
+          .wm-active-list-item img {
+            width: 18px !important;
+            height: 13px !important;
+          }
+          /* Compact popup for mobile */
+          .wm-popup-card {
+            min-width: 0 !important;
+            padding: 4px 7px !important;
+            gap: 5px !important;
+            border-radius: 6px !important;
+          }
+          .wm-popup-flag {
+            width: 16px !important;
+            height: 11px !important;
+            border-radius: 2px !important;
+          }
+          .wm-popup-name { font-size: 10px !important; line-height: 1.1 !important; }
+          .wm-popup-dial { font-size: 8.5px !important; line-height: 1.1 !important; }
+        }
+        /* Very small phones */
+        @media (max-width: 380px) {
+          .wm-title { font-size: 17px !important; }
+          .wm-svg { height: 300px !important; }
+          .wm-popup-card { padding: 3px 6px !important; }
+          .wm-popup-name { font-size: 9.5px !important; }
+          .wm-popup-dial { font-size: 8px !important; }
+        }
+      `}</style>
+
       {/* Header */}
       <div
-        className="bg-[rgb(30,58,138)] flex items-center justify-center"
+        className="wm-header bg-[rgb(30,58,138)] flex items-center justify-center"
         style={{
           minHeight: "100px",
           padding: "10px 16px",
@@ -447,6 +576,7 @@ export default function WorldMap() {
       >
         <div className="flex flex-col items-center justify-center text-center">
           <span
+            className="wm-title"
             style={{
               fontSize: 36,
               color: "#ffff00",
@@ -460,11 +590,11 @@ export default function WorldMap() {
 
       <div
         ref={containerRef}
-        className="relative w-full bg-white border border-blue-900 overflow-hidden"
+        className="wm-container relative w-full bg-white border border-blue-900 overflow-hidden"
         style={{ minHeight: 480 }}
       >
         {/* Live badge */}
-        <div className="absolute top-2.5 left-3.5 z-30 flex items-center gap-2">
+        <div className="wm-live-badge absolute top-2.5 left-3.5 z-30 flex items-center gap-2">
           <div
             className="w-2 h-2 rounded-full bg-green-500"
             style={{ animation: "pulse 1.8s ease-in-out infinite" }}
@@ -483,14 +613,19 @@ export default function WorldMap() {
         </div>
 
         {/* Active Countries List */}
-        <div
-          className="absolute top-[29rem] left-40 z-30"
-          style={{ maxHeight: 500, overflow: "hidden" }}
-        >
-          <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+{!isMobile && (
+  <div
+    className="wm-active-list absolute top-[29rem] left-40 z-30"
+    style={{ maxHeight: 500, overflow: "hidden" }}
+  >
+          <div
+            className="wm-active-list-inner"
+            style={{ display: "flex", flexDirection: "column", gap: "4px" }}
+          >
             {Object.values(popups).map(({ country }) => (
               <div
                 key={country.code}
+                className="wm-active-list-item"
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -517,10 +652,10 @@ export default function WorldMap() {
               </div>
             ))}
           </div>
-        </div>
-
+  </div>
+)}
         {/* Active badge */}
-        <div className="absolute top-2.5 right-3.5 z-30">
+        <div className="wm-active-badge absolute top-2.5 right-3.5 z-30">
           <span
             style={{
               fontSize: 11,
@@ -538,7 +673,10 @@ export default function WorldMap() {
 
         {/* SVG Map */}
         <svg
-          viewBox={`0 0 ${SVG_W} ${SVG_H - 110}`}
+          ref={svgRef}
+          className="wm-svg"
+          viewBox={`0 0 ${VB_W} ${VB_H}`}
+          preserveAspectRatio="xMidYMid meet"
           style={{
             display: "block",
             width: "100%",

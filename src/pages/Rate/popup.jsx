@@ -58,152 +58,173 @@ export default function RatePopupTable() {
     if (currentPage > 1) setCurrentPage((p) => p - 1);
   };
 
-  return (
-    <>
-      {/* OPEN BUTTON - Vertical Orange Box on Right Edge */}
-<div className="fixed top-1/2 right-0 -translate-y-1/2 z-[9998]">
-  <button
-    onClick={handleOpen}
-    className="bg-orange-500 hover:bg-orange-600 text-white font-semibold shadow-lg transition-all duration-200 flex items-center justify-center"
-    style={{
-      writingMode: "vertical-rl",
-      transform: "rotate(180deg)",
-      padding: "20px 8px",
-      fontSize: "14px",
-      minHeight: "140px",
-    }}
-  >
-    Special Rates
-  </button>
-</div>
-      {/* POPUP */}
-      {open && (
-        <div className="fixed inset-0 z-[9999] flex justify-end items-center pr-6">
-          {/* OVERLAY */}
-          <div
-            onClick={handleClose}
-            className={`absolute inset-0 bg-black/40 transition-opacity ${
-              animate ? "opacity-100" : "opacity-0"
-            }`}
-          />
+return (
+  <>
+    {/* OPEN BUTTON */}
+    <div className="fixed top-1/2 right-0 -translate-y-1/2 z-[9998]">
+      <button
+        onClick={handleOpen}
+        className="bg-orange-500 hover:bg-orange-600 text-white font-semibold shadow-lg transition-all duration-200 flex items-center justify-center
+        px-2 py-4 md:py-5 md:px-3 text-xs md:text-sm"
+        style={{
+          writingMode: "vertical-rl",
+          transform: "rotate(180deg)",
+          minHeight: "100px",
+        }}
+      >
+        Special Rates
+      </button>
+    </div>
 
-          {/* RIGHT CENTER PANEL */}
-          <div
-            className={`relative w-full max-w-xl h-[80vh] mr-6 bg-white flex flex-col p-5 rounded-xl shadow-2xl transition-all duration-300 ${
-              animate ? "translate-x-0 opacity-100" : "translate-x-10 opacity-0"
-            }`}
-          >
-            {/* HEADER */}
-            <div className="flex justify-between items-center border-b pb-3">
-              <h2 className="text-lg text-orange-500 font-semibold">
-                Special Rates
-              </h2>
+    {/* POPUP */}
+    {open && (
+      <div className="fixed inset-0 z-[9999] flex justify-end items-center md:pr-6">
+        {/* OVERLAY */}
+        <div
+          onClick={handleClose}
+          className={`absolute inset-0 bg-black/40 transition-opacity ${
+            animate ? "opacity-100" : "opacity-0"
+          }`}
+        />
 
-              <div className="flex items-center gap-3">
-                {/* RATE VIEW BUTTON */}
-                <button
-                  onClick={() => {
-                    handleClose();
-                    setTimeout(() => {
-                      navigate("/rate");
-                    }, 200);
-                  }}
-                  className="bg-green-500 hover:bg-green-600 text-white text-sm px-3 py-1.5 rounded"
-                >
-                  View Rate
-                </button>
+        {/* PANEL */}
+        <div
+          className={`relative w-full md:max-w-xl h-full md:h-[80vh]
+          bg-white flex flex-col p-4 md:p-5
+          md:rounded-xl shadow-2xl transition-all duration-300
+          ${animate ? "translate-x-0 opacity-100" : "translate-x-10 opacity-0"}`}
+        >
+          {/* HEADER */}
+          <div className="flex justify-between items-center border-b pb-3">
+            <h2 className="text-base md:text-lg text-orange-500 font-semibold">
+              Special Rates
+            </h2>
 
-                {/* CLOSE BUTTON */}
-                <button onClick={handleClose} className="text-red-500 text-xl">
-                  ✕
-                </button>
-              </div>
-            </div>
-
-            {/* SEARCH */}
-            <div className="my-3">
-              <input
-                type="text"
-                placeholder="Search country..."
-                value={search}
-                onChange={(e) => {
-                  setSearch(e.target.value);
-                  setCurrentPage(1);
-                }}
-                className="w-full border px-3 py-2 rounded"
-              />
-            </div>
-
-            {/* TABLE */}
-            <div className="overflow-y-auto flex-1">
-              <table className="w-full text-sm">
-                <thead className="bg-blue-600 text-white sticky top-0">
-                  <tr>
-                    <th className="p-2 text-left">Country</th>
-                    <th className="p-2 text-left">Quality Description</th>
-                    <th className="p-2 text-left">Profile</th>
-                    <th className="p-2 text-left">Rate</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {paginatedData.map((item) => (
-                    <tr key={item._id} className="border-b hover:bg-gray-50">
-                      <td className="p-2 text-gray-700">{item.country}</td>
-                      <td className="p-2 text-xs text-gray-500">
-                        {item.qualityDescription}
-                      </td>
-                      <td className="p-2">
-                        <span className="text-xs px-2 py-1 bg-blue-50 text-blue-600 rounded">
-                          {item.profile}
-                        </span>
-                      </td>
-                      <td className="p-2 text-gray-700">
-                        ${item.rate.toFixed(2)}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {/* PAGINATION */}
-            <div className="flex items-center justify-between mt-4">
+            <div className="flex items-center gap-2 md:gap-3">
               <button
-                onClick={prevPage}
-                disabled={currentPage === 1}
-                className="px-3 py-2 border rounded disabled:opacity-40"
+                onClick={() => {
+                  handleClose();
+                  setTimeout(() => navigate("/rate"), 200);
+                }}
+                className="bg-green-500 hover:bg-green-600 text-white text-xs md:text-sm px-2 md:px-3 py-1.5 rounded"
               >
-                ←
+                View Rate
               </button>
 
-              <div className="flex gap-2">
-                {Array.from({ length: totalPages }).map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setCurrentPage(i + 1)}
-                    className={`px-3 py-1 rounded ${
-                      currentPage === i + 1
-                        ? "bg-blue-600 text-white"
-                        : "bg-gray-200"
-                    }`}
-                  >
-                    {i + 1}
-                  </button>
-                ))}
-              </div>
-
               <button
-                onClick={nextPage}
-                disabled={currentPage === totalPages}
-                className="px-3 py-2 border rounded disabled:opacity-40"
+                onClick={handleClose}
+                className="text-red-500 text-lg md:text-xl"
               >
-                →
+                ✕
               </button>
             </div>
           </div>
+
+          {/* SEARCH */}
+          <div className="my-3">
+            <input
+              type="text"
+              placeholder="Search country..."
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                setCurrentPage(1);
+              }}
+              className="w-full border px-3 py-2 rounded text-sm"
+            />
+          </div>
+
+          {/* TABLE / CARD VIEW */}
+          <div className="flex-1">
+            <table className="w-full text-xs md:text-sm">
+              {/* DESKTOP HEADER */}
+              <thead className="bg-blue-600 text-white sticky top-0 hidden md:table-header-group">
+                <tr>
+                  <th className="p-2 text-left">Country</th>
+                  <th className="p-2 text-left">Quality</th>
+                  <th className="p-2 text-left">Profile</th>
+                  <th className="p-2 text-left">Rate</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {paginatedData.map((item) => (
+                  <tr
+                    key={item._id}
+                    className="border-b hover:bg-gray-50 block md:table-row mb-3 md:mb-0 p-2 md:p-0 rounded md:rounded-none bg-gray-50 md:bg-transparent"
+                  >
+                    <td className="p-2 md:table-cell block">
+                      <span className="font-semibold md:hidden">
+                        Country:{" "}
+                      </span>
+                      {item.country}
+                    </td>
+
+                    <td className="p-2 md:table-cell block text-gray-500 text-xs">
+                      <span className="font-semibold md:hidden">
+                        Quality:{" "}
+                      </span>
+                      {item.qualityDescription}
+                    </td>
+
+                    <td className="p-2 md:table-cell block">
+                      <span className="font-semibold md:hidden">
+                        Profile:{" "}
+                      </span>
+                      <span className="text-[10px] md:text-xs px-2 py-1 bg-blue-50 text-blue-600 rounded">
+                        {item.profile}
+                      </span>
+                    </td>
+
+                    <td className="p-2 md:table-cell block">
+                      <span className="font-semibold md:hidden">
+                        Rate:{" "}
+                      </span>
+                      ${item.rate.toFixed(2)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* PAGINATION */}
+          <div className="flex flex-wrap items-center justify-between gap-2 mt-4">
+            <button
+              onClick={prevPage}
+              disabled={currentPage === 1}
+              className="px-3 py-1.5 border rounded text-sm disabled:opacity-40"
+            >
+              ←
+            </button>
+
+            <div className="flex flex-wrap gap-1 justify-center">
+              {Array.from({ length: totalPages }).map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentPage(i + 1)}
+                  className={`px-2 py-1 text-xs md:text-sm rounded ${
+                    currentPage === i + 1
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-200"
+                  }`}
+                >
+                  {i + 1}
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={nextPage}
+              disabled={currentPage === totalPages}
+              className="px-3 py-1.5 border rounded text-sm disabled:opacity-40"
+            >
+              →
+            </button>
+          </div>
         </div>
-      )}
-    </>
-  );
+      </div>
+    )}
+  </>
+);
 }

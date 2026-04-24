@@ -406,9 +406,7 @@ export default function VoipHeader() {
                         [@media(min-width:1300px)]:max-w-none [@media(min-width:1300px)]:w-auto">
 
           <h1 className="font-[system-ui] text-3xl sm:text-4xl leading-[1.08] tracking-tight text-gray-500">
-            Connecting Through {" "}
-              <span className="text-blue-500">
-  Smart VoIP</span>
+            Connecting Througt Smart VoIP
           </h1>
 
           <p className="font-['DM_Sans',sans-serif] text-gray-500 text-sm md:text-[16px] leading-7 tracking-normal
@@ -428,22 +426,6 @@ export default function VoipHeader() {
               hover:bg-gray-100 hover:border-gray-400 transition-all duration-200 rounded-lg cursor-pointer">
               Learn More
             </button>
-          </div>
-
-          {/* Feature chips — mobile */}
-          <div className="flex flex-wrap gap-2 justify-center [@media(min-width:1300px)]:justify-start
-                          [@media(min-width:1300px)]:hidden">
-            {[
-              { Icon: ShieldIcon, label: "E2E Encrypted" },
-              { Icon: ZapIcon, label: "AI Noise Cancel" },
-              { Icon: GlobeIcon, label: "Global PoPs" },
-              { Icon: SignalIcon, label: "HD Voice" },
-            ].map(({ Icon, label }) => (
-              <div key={label} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-blue-100 text-[0.72rem] font-medium text-blue-700/80">
-                <span className="text-blue-500"><Icon /></span>
-                {label}
-              </div>
-            ))}
           </div>
         </div>
 

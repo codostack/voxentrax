@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   FaFacebookF,
   FaTwitter,
@@ -9,21 +9,33 @@ import {
 } from "react-icons/fa";
 import { Languages } from "lucide-react";
 import logo from "../assets/logo footer12.jpg";
+import { LanguageContext } from "../Context/LanguageContext";
+import usePageTranslator from "../usePageTranslator";
+import { navbarTranslations } from "./DummyTranslator/Navbar";
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const [language, setLanguage] = useState("EN");
+  const { language, setLanguage } = useContext(LanguageContext);
+  
+  const loading = usePageTranslator(language); // Capture loading state
 
-  const navItems = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Services", href: "/services" },
-    { name: "Rates", href: "/rate" },
-    { name: "Contact", href: "/contact" },
-    { name: "FAQ", href: "/faq" },
-  ];
+const nav = navbarTranslations[language] || navbarTranslations.en;
 
-  const languages = ["English", "French", "Arabic", "Spanish"];
+const navItems = [
+  { name: nav.home, href: "/" },
+  { name: nav.about, href: "/about" },
+  { name: nav.services, href: "/services" },
+  { name: nav.rates, href: "/rate" },
+  { name: nav.contact, href: "/contact" },
+  { name: nav.faq, href: "/faq" },
+];
 
+const languages = [
+  { name: "English", code: "en" },
+  { name: "French", code: "fr" },
+  { name: "Arabic", code: "ar" },
+  { name: "Spanish", code: "es" },
+];
   return (
     <nav className="bg-white sticky top-0 z-50">
       <div className="w-full px-6 py-4 relative flex items-center">
@@ -89,11 +101,11 @@ const Navbar = () => {
                 focus:ring-0 focus:border-gray-400
               "
             >
-              {languages.map((lang) => (
-                <option key={lang} value={lang}>
-                  {lang}
-                </option>
-              ))}
+  {languages.map((lang) => (
+    <option key={lang.code} value={lang.code}>
+      {lang.name}
+    </option>
+  ))}
             </select>
 
             <Languages
@@ -103,7 +115,7 @@ const Navbar = () => {
           </div>
 
           <button className="px-5 py-2 rounded-lg bg-white text-orange-500 hover:bg-orange-50 transition border border-orange-400">
-            Get a Demo
+           {nav.demo}
           </button>
 
 
@@ -138,13 +150,15 @@ const Navbar = () => {
               onChange={(e) => setLanguage(e.target.value)}
               className="px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 w-24 appearance-none"
             >
-              {languages.map((lang) => (
-                <option key={lang} value={lang}>{lang}</option>
-              ))}
+  {languages.map((lang) => (
+    <option key={lang.code} value={lang.code}>
+      {lang.name}
+    </option>
+  ))}
             </select>
 
             <button className="px-4 py-2 rounded-lg bg-blue-700 text-white">
-              Get a Demo
+             {nav.demo}
             </button>
           </div>
         </div>

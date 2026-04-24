@@ -7,10 +7,10 @@ const AboutPage = () => {
 
   return (
     <div>
-<Aboutheader/>
-<Content3/>
+      <Aboutheader />
+      <Content3 />
       <RegistrationPage />
-<AboutUsContent2/>
+      <AboutUsContent2 />
     </div>
   )
 }

@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { 
-  Globe, 
-  Settings, 
-  ShieldCheck, 
-  UserCircle, 
-  Cpu, 
-  LifeBuoy, 
- Search, 
- 
+import {
+  Globe,
+  Settings,
+  ShieldCheck,
+  UserCircle,
+  Cpu,
+  LifeBuoy,
+  Search,
 } from "lucide-react";
+
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
@@ -18,20 +18,20 @@ const styles = `
     --text-main: #101828;
     --text-muted: #667085;
     --border-light: #eaecf0;
-    
-    --color-1: #06b6d4; 
-    --color-2: #f97316; 
-    --color-3: #8b5cf6; 
-    --color-4: #ec4899; 
-    --color-5: #10b981; 
-    --color-6: #3b82f6; 
+
+    --color-1: #06b6d4;
+    --color-2: #f97316;
+    --color-3: #8b5cf6;
+    --color-4: #ec4899;
+    --color-5: #10b981;
+    --color-6: #3b82f6;
   }
 
-  .faq-root * { 
-    box-sizing: border-box; 
-    margin: 0; 
-    padding: 0; 
-    font-family: 'Plus Jakarta Sans', sans-serif; 
+  .faq-root * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
   }
 
   .faq-section {
@@ -43,23 +43,20 @@ const styles = `
 
   .faq-container { max-width: 1200px; margin: 0 auto; }
 
-  /* ── UPDATED HEADER: CENTERED WITH BORDER ── */
-/* ── UPDATED HEADER: PROFESSIONAL BOXED STYLE ── */
-  .faq-header { 
-    margin-bottom: 14px; 
-    padding: 10px 20px; /* Increased padding for a spacious, professional feel */
-    text-align: center; 
-    border: 1px solid var(--border-light); /* Full border box */
-    border-radius: 8px; /* Slight rounding for a modern touch */
-   
-    width: 100%; /* Ensures it spans the full width of the container */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03); /* Soft shadow for depth */
+  .faq-header {
+    margin-bottom: 14px;
+    padding: 10px 20px;
+    text-align: center;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
   }
-  
+
   .faq-eyebrow {
-  color: #6b7280; /* light blue */
+    color: #6b7280;
     font-weight: 700;
-    font-size: 12px; /* Slightly smaller for better contrast with title */
+    font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 2.5px;
     margin-bottom: 16px;
@@ -69,14 +66,14 @@ const styles = `
 
   .faq-title {
     font-size: clamp(24px, 4vw, 32px);
-    color: #f4944f; /* Kept your specific blue */
-    font-weight: 600; /* Increased weight slightly for "Professional" look */
+    color: #f4944f;
+    font-weight: 600;
     line-height: 1.3;
     letter-spacing: -0.2px;
     max-width: 800px;
     margin: 0 auto;
   }
-/* ── UPDATED ICON CONTAINER ── */
+
   .faq-nav-icon-wrapper {
     width: 44px;
     height: 44px;
@@ -90,7 +87,7 @@ const styles = `
     flex-shrink: 0;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   }
-  /* ── GRID & SIDEBAR ── */
+
   .faq-grid {
     display: grid;
     grid-template-columns: 380px 1fr;
@@ -111,18 +108,19 @@ const styles = `
     align-items: center;
     background: var(--card-bg);
     padding: 10px;
-    border-radius: 10px 10px 10px 10px;
+    border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
     border: 1px solid var(--border-light);
   }
 
-.faq-nav-item.active {
-  background: #fff;
-  border-color: #3b82f6; /* blue-500 */
-  transform: translateX(8px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
-}
+  .faq-nav-item.active {
+    background: #fff;
+    border-color: #3b82f6;
+    transform: translateX(8px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+  }
+
   .faq-nav-circle {
     width: 48px;
     height: 48px;
@@ -141,61 +139,39 @@ const styles = `
   .faq-nav-label { display: block; font-size: 15px; font-weight: 600; color: var(--text-main); }
   .faq-nav-sub { font-size: 12px; color: var(--text-muted); }
 
-  /* ── SEARCH (PROFESSIONAL UPGRADE) ── */
-.faq-search-area { 
-  margin-bottom: 28px; 
-  position: relative; 
-}
+  .faq-search-area {
+    margin-bottom: 28px;
+    position: relative;
+  }
 
-.faq-search-input {
-  width: 100%;
-  padding: 14px 20px 14px 52px;
-  border-radius: 14px;
-  border: 1px solid var(--border-light);
-  background: #ffffff;
-  font-size: 15px;
-  outline: none;
-  color: var(--text-main);
+  .faq-search-input {
+    width: 100%;
+    padding: 14px 20px 14px 52px;
+    border-radius: 14px;
+    border: 1px solid var(--border-light);
+    background: #ffffff;
+    font-size: 15px;
+    outline: none;
+    color: var(--text-main);
+    transition: all 0.25s ease;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+  }
+  .faq-search-input:hover { border-color: #d0d5dd; }
+  .faq-search-input:focus {
+    border-color: var(--color-1);
+    box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.15);
+  }
+  .faq-search-input::placeholder { color: #98a2b3; font-weight: 400; }
+  .faq-search-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #98a2b3;
+    transition: color 0.25s ease;
+  }
+  .faq-search-input:focus + .faq-search-icon { color: var(--color-1); }
 
-  /* ✨ smooth UX */
-  transition: all 0.25s ease;
-
-  /* ✨ soft shadow */
-  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
-}
-
-/* ✨ hover effect */
-.faq-search-input:hover {
-  border-color: #d0d5dd;
-}
-
-/* 🔥 focus (premium look) */
-.faq-search-input:focus {
-  border-color: var(--color-1);
-  box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.15);
-}
-
-/* placeholder */
-.faq-search-input::placeholder {
-  color: #98a2b3;
-  font-weight: 400;
-}
-
-/* icon */
-.faq-search-icon { 
-  position: absolute; 
-  left: 18px; 
-  top: 50%; 
-  transform: translateY(-50%);
-  color: #98a2b3;
-  transition: color 0.25s ease;
-}
-
-/* icon highlight on focus */
-.faq-search-input:focus + .faq-search-icon {
-  color: var(--color-1);
-}
-  /* ── ACCORDION ── */
   .faq-main-list { display: flex; flex-direction: column; gap: 12px; }
   .faq-card {
     background: #fff;
@@ -219,7 +195,93 @@ const styles = `
   .faq-card.open .faq-icon-box { background: var(--active-color); color: #fff; transform: rotate(45deg); }
   .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
   .faq-answer { padding: 0 24px 24px 24px; color: var(--text-muted); line-height: 1.6; font-size: 15px; }
+
+  /* ===== Responsive overrides — desktop view unchanged ===== */
+  /* Tablet — sidebar becomes a 2-column grid above content */
+  @media (max-width: 992px) {
+    .faq-section { padding: 14px 18px; }
+    .faq-header { padding: 14px 18px; margin-bottom: 18px; }
+    .faq-nav {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .faq-nav-item.active { transform: none !important; }
+  }
+
+  /* Mobile — categories become a horizontal scroll strip */
+  @media (max-width: 767px) {
+    .faq-section { padding: 12px 12px; min-height: 0; }
+    .faq-header { padding: 12px 14px; margin-bottom: 14px; border-radius: 10px; }
+    .faq-eyebrow { font-size: 10px; letter-spacing: 2px; margin-bottom: 8px; }
+    .faq-title { font-size: 19px !important; line-height: 1.3; }
+
+    .faq-grid { gap: 18px; }
+    .faq-sidebar { margin-bottom: 14px !important; }
+
+    /* Horizontal scrollable category chips */
+    .faq-nav {
+      display: flex !important;
+      flex-direction: row !important;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin: 0 -12px;
+      padding-left: 12px;
+      padding-right: 12px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .faq-nav::-webkit-scrollbar { display: none; }
+    .faq-nav-item {
+      flex: 0 0 auto;
+      padding: 8px 10px;
+      border-radius: 12px;
+      scroll-snap-align: start;
+      min-width: 160px;
+    }
+    .faq-nav-icon-wrapper {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      margin-right: 9px;
+    }
+    .faq-nav-icon-wrapper svg { width: 17px !important; height: 17px !important; }
+    .faq-nav-label { font-size: 13px; }
+    .faq-nav-sub { font-size: 10.5px; }
+
+    /* Search */
+    .faq-search-area { margin-bottom: 16px; }
+    .faq-search-input {
+      padding: 11px 14px 11px 42px;
+      border-radius: 11px;
+      font-size: 13.5px;
+    }
+    .faq-search-icon { left: 13px; }
+    .faq-search-icon svg, .faq-search-area svg { width: 16px !important; height: 16px !important; }
+
+    /* Accordion */
+    .faq-main-list { gap: 10px; }
+    .faq-card { border-radius: 12px; }
+    .faq-trigger { padding: 14px 14px; gap: 10px; }
+    .faq-q-text { font-size: 13.5px; line-height: 1.4; }
+    .faq-icon-box { width: 24px; height: 24px; font-size: 14px; }
+    .faq-answer {
+      padding: 0 14px 14px 14px;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+  }
+
+  /* Tiny phones */
+  @media (max-width: 380px) {
+    .faq-title { font-size: 17px !important; }
+    .faq-nav-item { min-width: 145px; }
+    .faq-q-text { font-size: 12.5px; }
+    .faq-answer { font-size: 12px; }
+  }
 `;
+
 const categories = [
   { name: "General", sub: "Platform basics", color: "var(--color-1)", icon: Globe },
   { name: "Technical", sub: "Setup & Speed", color: "var(--color-2)", icon: Settings },
@@ -231,196 +293,46 @@ const categories = [
 
 const faqs = [
   /* ───────── GENERAL (5) ───────── */
-  {
-    id: 1,
-    cat: "General",
-    q: "What is VoIP?",
-    a: "VoIP (Voice over Internet Protocol) allows you to make voice and video calls over the internet instead of traditional phone lines.",
-  },
-  {
-    id: 2,
-    cat: "General",
-    q: "Who can use VoIP services?",
-    a: "VoIP is suitable for businesses of all sizes, remote teams, and individuals who need flexible communication.",
-  },
-  {
-    id: 3,
-    cat: "General",
-    q: "Can I make international calls?",
-    a: "Yes, VoIP allows you to make international calls at significantly reduced rates compared to traditional providers.",
-  },
-  {
-    id: 4,
-    cat: "General",
-    q: "How quickly can I get started?",
-    a: "Most users can set up and start using VoIP within minutes after account activation.",
-  },
-  {
-    id: 5,
-    cat: "General",
-    q: "Do I need special equipment?",
-    a: "No special hardware is required. You can use VoIP on mobile apps, desktop software, or IP phones.",
-  },
+  { id: 1, cat: "General", q: "What is VoIP?", a: "VoIP (Voice over Internet Protocol) allows you to make voice and video calls over the internet instead of traditional phone lines." },
+  { id: 2, cat: "General", q: "Who can use VoIP services?", a: "VoIP is suitable for businesses of all sizes, remote teams, and individuals who need flexible communication." },
+  { id: 3, cat: "General", q: "Can I make international calls?", a: "Yes, VoIP allows you to make international calls at significantly reduced rates compared to traditional providers." },
+  { id: 4, cat: "General", q: "How quickly can I get started?", a: "Most users can set up and start using VoIP within minutes after account activation." },
+  { id: 5, cat: "General", q: "Do I need special equipment?", a: "No special hardware is required. You can use VoIP on mobile apps, desktop software, or IP phones." },
 
   /* ───────── TECHNICAL (5) ───────── */
-  {
-    id: 6,
-    cat: "Technical",
-    q: "How does VoIP work?",
-    a: "Your voice is converted into digital packets and transmitted securely over the internet using advanced codecs.",
-  },
-  {
-    id: 7,
-    cat: "Technical",
-    q: "What internet speed is required?",
-    a: "A stable connection with at least 100 kbps per call is recommended for optimal quality.",
-  },
-  {
-    id: 8,
-    cat: "Technical",
-    q: "What happens if my internet goes out?",
-    a: "We offer Call Continuity which automatically reroutes calls to your mobile device if your office internet fails.",
-  },
-  {
-    id: 9,
-    cat: "Technical",
-    q: "What router settings are best?",
-    a: "Enabling Quality of Service (QoS) on your router to prioritize SIP traffic ensures the best audio quality.",
-  },
-  {
-    id: 10,
-    cat: "Technical",
-    q: "Does VoIP support HD audio?",
-    a: "Yes, VoIP systems use wideband codecs to deliver HD voice quality over stable internet connections.",
-  },
+  { id: 6, cat: "Technical", q: "How does VoIP work?", a: "Your voice is converted into digital packets and transmitted securely over the internet using advanced codecs." },
+  { id: 7, cat: "Technical", q: "What internet speed is required?", a: "A stable connection with at least 100 kbps per call is recommended for optimal quality." },
+  { id: 8, cat: "Technical", q: "What happens if my internet goes out?", a: "We offer Call Continuity which automatically reroutes calls to your mobile device if your office internet fails." },
+  { id: 9, cat: "Technical", q: "What router settings are best?", a: "Enabling Quality of Service (QoS) on your router to prioritize SIP traffic ensures the best audio quality." },
+  { id: 10, cat: "Technical", q: "Does VoIP support HD audio?", a: "Yes, VoIP systems use wideband codecs to deliver HD voice quality over stable internet connections." },
 
   /* ───────── SECURITY (5) ───────── */
-  {
-    id: 11,
-    cat: "Security",
-    q: "Is my data safe?",
-    a: "We use TLS and SRTP end-to-end encryption, backed by ISO-certified cloud infrastructure.",
-  },
-  {
-    id: 12,
-    cat: "Security",
-    q: "Do you protect against spam calls?",
-    a: "We implement AI-driven fraud detection, IP filtering, and traffic monitoring to prevent unauthorized access.",
-  },
-  {
-    id: 13,
-    cat: "Security",
-    q: "How do you prevent vishing attacks?",
-    a: "We use STIR/SHAKEN protocols to verify caller ID and protect against number spoofing.",
-  },
-  {
-    id: 14,
-    cat: "Security",
-    q: "Is VoIP encrypted?",
-    a: "Yes, all calls and signaling are encrypted using modern industry standards.",
-  },
-  {
-    id: 15,
-    cat: "Security",
-    q: "Can hackers intercept VoIP calls?",
-    a: "With encrypted transmission and secure infrastructure, interception is highly unlikely and prevented by default.",
-  },
+  { id: 11, cat: "Security", q: "Is my data safe?", a: "We use TLS and SRTP end-to-end encryption, backed by ISO-certified cloud infrastructure." },
+  { id: 12, cat: "Security", q: "Do you protect against spam calls?", a: "We implement AI-driven fraud detection, IP filtering, and traffic monitoring to prevent unauthorized access." },
+  { id: 13, cat: "Security", q: "How do you prevent vishing attacks?", a: "We use STIR/SHAKEN protocols to verify caller ID and protect against number spoofing." },
+  { id: 14, cat: "Security", q: "Is VoIP encrypted?", a: "Yes, all calls and signaling are encrypted using modern industry standards." },
+  { id: 15, cat: "Security", q: "Can hackers intercept VoIP calls?", a: "With encrypted transmission and secure infrastructure, interception is highly unlikely and prevented by default." },
 
   /* ───────── ACCOUNT (5) ───────── */
-  {
-    id: 16,
-    cat: "Account",
-    q: "Can I port my existing number?",
-    a: "Yes — you can transfer your existing business number with zero downtime. Our team manages the entire process.",
-  },
-  {
-    id: 17,
-    cat: "Account",
-    q: "Can I cancel anytime?",
-    a: "Yes. There are no long-term contracts. You can upgrade, downgrade, or cancel anytime from your dashboard.",
-  },
-  {
-    id: 18,
-    cat: "Account",
-    q: "Are there activation fees?",
-    a: "No. Setup and activation are 100% free with no hidden charges.",
-  },
-  {
-    id: 19,
-    cat: "Account",
-    q: "Can I use multiple devices?",
-    a: "Yes, you can log in from multiple devices including mobile, desktop, and desk phones.",
-  },
-  {
-    id: 20,
-    cat: "Account",
-    q: "Is billing monthly or yearly?",
-    a: "We offer flexible billing options including monthly and discounted yearly plans.",
-  },
+  { id: 16, cat: "Account", q: "Can I port my existing number?", a: "Yes — you can transfer your existing business number with zero downtime. Our team manages the entire process." },
+  { id: 17, cat: "Account", q: "Can I cancel anytime?", a: "Yes. There are no long-term contracts. You can upgrade, downgrade, or cancel anytime from your dashboard." },
+  { id: 18, cat: "Account", q: "Are there activation fees?", a: "No. Setup and activation are 100% free with no hidden charges." },
+  { id: 19, cat: "Account", q: "Can I use multiple devices?", a: "Yes, you can log in from multiple devices including mobile, desktop, and desk phones." },
+  { id: 20, cat: "Account", q: "Is billing monthly or yearly?", a: "We offer flexible billing options including monthly and discounted yearly plans." },
 
   /* ───────── FEATURES (5) ───────── */
-  {
-    id: 21,
-    cat: "Features",
-    q: "What features are included?",
-    a: "HD calling, IVR systems, real-time analytics, recordings, and CRM integrations are included.",
-  },
-  {
-    id: 22,
-    cat: "Features",
-    q: "Do you offer call recording?",
-    a: "Yes, automatic and on-demand call recording is available with secure cloud storage.",
-  },
-  {
-    id: 23,
-    cat: "Features",
-    q: "Does the platform support video conferencing?",
-    a: "Yes, HD video conferencing with screen sharing and recording for up to 500 participants is supported.",
-  },
-  {
-    id: 24,
-    cat: "Features",
-    q: "Is VoIP suitable for remote teams?",
-    a: "Yes, it enables global communication through voice, video, and messaging from anywhere.",
-  },
-  {
-    id: 25,
-    cat: "Features",
-    q: "Does it integrate with CRM tools?",
-    a: "Yes, it integrates with popular CRM platforms for seamless workflow automation.",
-  },
+  { id: 21, cat: "Features", q: "What features are included?", a: "HD calling, IVR systems, real-time analytics, recordings, and CRM integrations are included." },
+  { id: 22, cat: "Features", q: "Do you offer call recording?", a: "Yes, automatic and on-demand call recording is available with secure cloud storage." },
+  { id: 23, cat: "Features", q: "Does the platform support video conferencing?", a: "Yes, HD video conferencing with screen sharing and recording for up to 500 participants is supported." },
+  { id: 24, cat: "Features", q: "Is VoIP suitable for remote teams?", a: "Yes, it enables global communication through voice, video, and messaging from anywhere." },
+  { id: 25, cat: "Features", q: "Does it integrate with CRM tools?", a: "Yes, it integrates with popular CRM platforms for seamless workflow automation." },
 
   /* ───────── SUPPORT (5) ───────── */
-  {
-    id: 26,
-    cat: "Support",
-    q: "Can I use VoIP for emergency calls?",
-    a: "Yes, we support E911. You must maintain an updated physical address for emergency routing.",
-  },
-  {
-    id: 27,
-    cat: "Support",
-    q: "What support is available?",
-    a: "We provide 24/7 technical support via live chat, email, and phone.",
-  },
-  {
-    id: 28,
-    cat: "Support",
-    q: "Is training provided for staff?",
-    a: "Yes, we offer free onboarding webinars and video tutorials.",
-  },
-  {
-    id: 29,
-    cat: "Support",
-    q: "Do you provide setup assistance?",
-    a: "Yes, our team assists with full setup and configuration for businesses.",
-  },
-  {
-    id: 30,
-    cat: "Support",
-    q: "How fast is your response time?",
-    a: "Most support queries are answered within minutes via live chat.",
-  },
+  { id: 26, cat: "Support", q: "Can I use VoIP for emergency calls?", a: "Yes, we support E911. You must maintain an updated physical address for emergency routing." },
+  { id: 27, cat: "Support", q: "What support is available?", a: "We provide 24/7 technical support via live chat, email, and phone." },
+  { id: 28, cat: "Support", q: "Is training provided for staff?", a: "Yes, we offer free onboarding webinars and video tutorials." },
+  { id: 29, cat: "Support", q: "Do you provide setup assistance?", a: "Yes, our team assists with full setup and configuration for businesses." },
+  { id: 30, cat: "Support", q: "How fast is your response time?", a: "Most support queries are answered within minutes via live chat." },
 ];
 
 function FAQCard({ faq, color }) {
@@ -442,16 +354,14 @@ export default function ProfessionalVoIPFAQ() {
   const [activeCat, setActiveCat] = useState("General");
   const [search, setSearch] = useState("");
 
-  const filtered = faqs.filter(f => 
-    f.cat === activeCat && 
+  const filtered = faqs.filter(f =>
+    f.cat === activeCat &&
     (f.q.toLowerCase().includes(search.toLowerCase()))
   );
 
   const activeCategoryData = categories.find(c => c.name === activeCat);
 
-
-
- return (
+  return (
     <div className="faq-root">
       <style>{styles}</style>
       <section className="faq-section">
@@ -467,8 +377,8 @@ export default function ProfessionalVoIPFAQ() {
                 {categories.map((cat) => {
                   const Icon = cat.icon;
                   return (
-                    <div 
-                      key={cat.name} 
+                    <div
+                      key={cat.name}
                       className={`faq-nav-item ${activeCat === cat.name ? 'active' : ''}`}
                       style={{ '--active-color': cat.color }}
                       onClick={() => setActiveCat(cat.name)}
@@ -489,10 +399,10 @@ export default function ProfessionalVoIPFAQ() {
             <div className="faq-content-main">
               <div className="faq-search-area">
                 <Search className="faq-search-icon" size={20} />
-                <input 
+                <input
                   className="faq-search-input"
-                  type="text" 
-                  placeholder={`Search in ${activeCat}...`} 
+                  type="text"
+                  placeholder={`Search in ${activeCat}...`}
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />

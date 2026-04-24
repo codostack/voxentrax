@@ -5,8 +5,8 @@ import Faqheader from "./components/Faqheader"
 const FaqPage = () => {
   return (
     <div>
-<Faqheader/>
-      <VoipFAQ/>
+      <Faqheader />
+      <VoipFAQ />
     </div>
   )
 }

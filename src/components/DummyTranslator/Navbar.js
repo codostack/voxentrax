@@ -1,0 +1,38 @@
+export const navbarTranslations = {
+  en: {
+    home: "Home",
+    about: "About",
+    services: "Services",
+    rates: "Rates",
+    contact: "Contact",
+    faq: "FAQ",
+    demo: "Get a Demo",
+  },
+  fr: {
+    home: "Accueil",
+    about: "À propos",
+    services: "Services",
+    rates: "Tarifs",
+    contact: "Contact",
+    faq: "FAQ",
+    demo: "Obtenir une démo",
+  },
+  ar: {
+    home: "الرئيسية",
+    about: "حول",
+    services: "الخدمات",
+    rates: "الأسعار",
+    contact: "اتصال",
+    faq: "التعليمات",
+    demo: "احصل على عرض",
+  },
+  es: {
+    home: "Inicio",
+    about: "Acerca de",
+    services: "Servicios",
+    rates: "Tarifas",
+    contact: "Contacto",
+    faq: "Preguntas",
+    demo: "Obtener demo",
+  },
+};

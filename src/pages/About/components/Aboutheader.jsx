@@ -36,7 +36,10 @@ export default function VoIPHero() {
   ];
 
   return (
-    <div style={{ height: "88vh" }} className="w-full bg-white flex justify-around items-center px-1">
+    <div
+      style={{ height: "88vh" }}
+      className="voip-hero w-full bg-white flex justify-around items-center px-1"
+    >
       <style>{`
         @keyframes waveBar {
           from { transform: scaleY(0.5); }
@@ -57,12 +60,52 @@ export default function VoIPHero() {
         .animate-spin-reverse { animation: spin 6s linear infinite reverse; }
         .animate-float-b { animation: float 4s ease-in-out infinite; }
         .animate-pop-in { animation: popIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+        /* ===== Responsive overrides — desktop view unchanged ===== */
+        /* Tablet */
+        @media (max-width: 1023px) {
+          .voip-hero {
+            flex-direction: column !important;
+            justify-content: center !important;
+            gap: 28px;
+            padding: 32px 20px !important;
+            height: auto !important;
+            min-height: 88vh;
+          }
+          .voip-hero-left { text-align: center; }
+          .voip-hero-right { padding: 16px !important; }
+        }
+        /* Mobile — hide the right-side animation entirely */
+        @media (max-width: 767px) {
+          .voip-hero {
+            height: auto !important;
+            min-height: 0 !important;
+            padding: 36px 18px !important;
+          }
+          .voip-hero-right { display: none !important; }
+          .voip-hero-left {
+            width: 100%;
+            text-align: center;
+          }
+          .voip-hero-left h1 { font-size: 26px !important; line-height: 1.15 !important; }
+          .voip-hero-left p {
+            font-size: 13px !important;
+            line-height: 1.65 !important;
+            text-align: left !important;
+            margin-left: auto;
+            margin-right: auto;
+          }
+          .voip-hero-cta { justify-content: center !important; }
+        }
+        /* Very small phones */
+        @media (max-width: 380px) {
+          .voip-hero-left h1 { font-size: 22px !important; }
+          .voip-hero-cta button { padding: 10px 16px !important; font-size: 12px !important; }
+        }
       `}</style>
 
       {/* ── Left Side: Content ── */}
-      {/* Left Side */}
-
-      <div className="space-y-8 animate-pop-in lg:col-span-1">
+      <div className="voip-hero-left space-y-8 animate-pop-in lg:col-span-1">
         <div className="space-y-4">
 
           <h1 className="font-[system-ui] text-3xl sm:text-4xl leading-[1.08] tracking-tight text-gray-500">
@@ -79,7 +122,7 @@ export default function VoIPHero() {
           </p>
         </div>
 
-        <div className="flex items-center gap-3 flex-wrap justify-center [@media(min-width:1300px)]:justify-start pt-1">
+        <div className="voip-hero-cta flex items-center gap-3 flex-wrap justify-center [@media(min-width:1300px)]:justify-start pt-1">
           <button className="inline-flex items-center gap-2 px-6 py-3 text-white text-sm font-semibold
               bg-blue-500 hover:bg-blue-600 transition-all duration-200 rounded-lg shadow-md shadow-blue-100 cursor-pointer">
             Get Started
@@ -93,8 +136,8 @@ export default function VoIPHero() {
       </div>
 
       {/* ── Right Side: Your Original Design ── */}
-      {/* Right Side */}
-      <div className="p-8 font-sans relative overflow-hidden rounded-3xl lg:col-span-2">          {/* Decorative blobs */}
+      <div className="voip-hero-right p-8 font-sans relative overflow-hidden rounded-3xl lg:col-span-2">
+        {/* Decorative blobs */}
         {/* <div className="absolute -top-14 -right-14 w-52 h-52 rounded-full bg-white opacity-50 pointer-events-none" />
           <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg- opacity-60 pointer-events-none" /> */}
 
