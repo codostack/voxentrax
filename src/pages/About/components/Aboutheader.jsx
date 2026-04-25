@@ -91,7 +91,7 @@ export default function VoIPHero() {
           .voip-hero-left p {
             font-size: 13px !important;
             line-height: 1.65 !important;
-            text-align: left !important;
+            text-align: justify !important;
             margin-left: auto;
             margin-right: auto;
           }
@@ -137,10 +137,6 @@ export default function VoIPHero() {
 
       {/* ── Right Side: Your Original Design ── */}
       <div className="voip-hero-right p-8 font-sans relative overflow-hidden rounded-3xl lg:col-span-2">
-        {/* Decorative blobs */}
-        {/* <div className="absolute -top-14 -right-14 w-52 h-52 rounded-full bg-white opacity-50 pointer-events-none" />
-          <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg- opacity-60 pointer-events-none" /> */}
-
         <div className="relative grid grid-cols-2 gap-4 max-w-xl mx-auto">
 
           {/* Feature Cards */}

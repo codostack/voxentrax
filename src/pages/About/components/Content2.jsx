@@ -43,7 +43,7 @@ export default function AboutUsContent2() {
           .ab2-text-wrap p {
             font-size: 14px !important;
             line-height: 1.7 !important;
-            text-align: left !important;
+            text-align: justify !important;
             margin-bottom: 12px !important;
           }
         }

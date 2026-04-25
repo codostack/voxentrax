@@ -1,417 +1,313 @@
 import { useState } from "react";
-import {
-  Globe,
-  Settings,
-  ShieldCheck,
-  UserCircle,
-  Cpu,
-  LifeBuoy,
-  Search,
-} from "lucide-react";
 
-const styles = `
-  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+// ─── SVG Icons ────────────────────────────────────────────────────────────────
+const GlobeIcon = () => (
+  <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10" />
+    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+  </svg>
+);
 
-  :root {
-    --bg-main: #fcfcfd;
-    --card-bg: #ffffff;
-    --text-main: #101828;
-    --text-muted: #667085;
-    --border-light: #eaecf0;
+const TechIcon = () => (
+  <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="3" />
+    <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
+  </svg>
+);
 
-    --color-1: #06b6d4;
-    --color-2: #f97316;
-    --color-3: #8b5cf6;
-    --color-4: #ec4899;
-    --color-5: #10b981;
-    --color-6: #3b82f6;
-  }
+const ShieldIcon = () => (
+  <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+  </svg>
+);
 
-  .faq-root * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-  }
+const UserIcon = () => (
+  <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+    <circle cx="12" cy="7" r="4" />
+  </svg>
+);
 
-  .faq-section {
-    width: 100%;
-    background: var(--bg-main);
-    padding: 10px 14px;
-    min-height: 100vh;
-  }
+const GridIcon = () => (
+  <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+    <rect x="2" y="2" width="8" height="8" rx="1" />
+    <rect x="14" y="2" width="8" height="8" rx="1" />
+    <rect x="2" y="14" width="8" height="8" rx="1" />
+    <rect x="14" y="14" width="8" height="8" rx="1" />
+  </svg>
+);
 
-  .faq-container { max-width: 1200px; margin: 0 auto; }
+const SupportIcon = () => (
+  <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10" />
+    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+    <line x1="12" y1="17" x2="12.01" y2="17" strokeWidth="3" strokeLinecap="round" />
+  </svg>
+);
 
-  .faq-header {
-    margin-bottom: 14px;
-    padding: 10px 20px;
-    text-align: center;
-    border: 1px solid var(--border-light);
-    border-radius: 8px;
-    width: 100%;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-  }
+const SearchIcon = () => (
+  <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <circle cx="11" cy="11" r="8" />
+    <path d="m21 21-4.35-4.35" />
+  </svg>
+);
 
-  .faq-eyebrow {
-    color: #6b7280;
-    font-weight: 700;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 2.5px;
-    margin-bottom: 16px;
-    display: block;
-    opacity: 0.8;
-  }
-
-  .faq-title {
-    font-size: clamp(24px, 4vw, 32px);
-    color: #f4944f;
-    font-weight: 600;
-    line-height: 1.3;
-    letter-spacing: -0.2px;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .faq-nav-icon-wrapper {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    background: var(--active-color);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 14px;
-    flex-shrink: 0;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  }
-
-  .faq-grid {
-    display: grid;
-    grid-template-columns: 380px 1fr;
-    gap: 48px;
-    align-items: start;
-  }
-
-  @media (max-width: 992px) {
-    .faq-grid { grid-template-columns: 1fr; }
-    .faq-sidebar { position: static !important; margin-bottom: 30px; }
-  }
-
-  .faq-sidebar { position: sticky; top: 40px; }
-  .faq-nav { display: flex; flex-direction: column; gap: 12px; }
-
-  .faq-nav-item {
-    display: flex;
-    align-items: center;
-    background: var(--card-bg);
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 1px solid var(--border-light);
-  }
-
-  .faq-nav-item.active {
-    background: #fff;
-    border-color: #3b82f6;
-    transform: translateX(8px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
-  }
-
-  .faq-nav-circle {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: var(--active-color);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    font-weight: 700;
-    margin-right: 16px;
-    flex-shrink: 0;
-  }
-
-  .faq-nav-label { display: block; font-size: 15px; font-weight: 600; color: var(--text-main); }
-  .faq-nav-sub { font-size: 12px; color: var(--text-muted); }
-
-  .faq-search-area {
-    margin-bottom: 28px;
-    position: relative;
-  }
-
-  .faq-search-input {
-    width: 100%;
-    padding: 14px 20px 14px 52px;
-    border-radius: 14px;
-    border: 1px solid var(--border-light);
-    background: #ffffff;
-    font-size: 15px;
-    outline: none;
-    color: var(--text-main);
-    transition: all 0.25s ease;
-    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
-  }
-  .faq-search-input:hover { border-color: #d0d5dd; }
-  .faq-search-input:focus {
-    border-color: var(--color-1);
-    box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.15);
-  }
-  .faq-search-input::placeholder { color: #98a2b3; font-weight: 400; }
-  .faq-search-icon {
-    position: absolute;
-    left: 18px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #98a2b3;
-    transition: color 0.25s ease;
-  }
-  .faq-search-input:focus + .faq-search-icon { color: var(--color-1); }
-
-  .faq-main-list { display: flex; flex-direction: column; gap: 12px; }
-  .faq-card {
-    background: #fff;
-    border: 1px solid var(--border-light);
-    border-radius: 16px;
-    overflow: hidden;
-    transition: all 0.3s;
-  }
-  .faq-card.open { border-color: var(--active-color); }
-  .faq-trigger {
-    width: 100%; padding: 20px 24px; background: none; border: none;
-    display: flex; align-items: center; justify-content: space-between;
-    cursor: pointer; text-align: left; gap: 16px;
-  }
-  .faq-q-text { font-size: 16px; font-weight: 600; color: var(--text-main); }
-  .faq-icon-box {
-    width: 28px; height: 28px; border-radius: 6px; background: #f9fafb;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--text-muted); transition: all 0.3s;
-  }
-  .faq-card.open .faq-icon-box { background: var(--active-color); color: #fff; transform: rotate(45deg); }
-  .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
-  .faq-answer { padding: 0 24px 24px 24px; color: var(--text-muted); line-height: 1.6; font-size: 15px; }
-
-  /* ===== Responsive overrides — desktop view unchanged ===== */
-  /* Tablet — sidebar becomes a 2-column grid above content */
-  @media (max-width: 992px) {
-    .faq-section { padding: 14px 18px; }
-    .faq-header { padding: 14px 18px; margin-bottom: 18px; }
-    .faq-nav {
-      display: grid !important;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-    .faq-nav-item.active { transform: none !important; }
-  }
-
-  /* Mobile — categories become a horizontal scroll strip */
-  @media (max-width: 767px) {
-    .faq-section { padding: 12px 12px; min-height: 0; }
-    .faq-header { padding: 12px 14px; margin-bottom: 14px; border-radius: 10px; }
-    .faq-eyebrow { font-size: 10px; letter-spacing: 2px; margin-bottom: 8px; }
-    .faq-title { font-size: 19px !important; line-height: 1.3; }
-
-    .faq-grid { gap: 18px; }
-    .faq-sidebar { margin-bottom: 14px !important; }
-
-    /* Horizontal scrollable category chips */
-    .faq-nav {
-      display: flex !important;
-      flex-direction: row !important;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 6px;
-      margin: 0 -12px;
-      padding-left: 12px;
-      padding-right: 12px;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-    }
-    .faq-nav::-webkit-scrollbar { display: none; }
-    .faq-nav-item {
-      flex: 0 0 auto;
-      padding: 8px 10px;
-      border-radius: 12px;
-      scroll-snap-align: start;
-      min-width: 160px;
-    }
-    .faq-nav-icon-wrapper {
-      width: 34px;
-      height: 34px;
-      border-radius: 9px;
-      margin-right: 9px;
-    }
-    .faq-nav-icon-wrapper svg { width: 17px !important; height: 17px !important; }
-    .faq-nav-label { font-size: 13px; }
-    .faq-nav-sub { font-size: 10.5px; }
-
-    /* Search */
-    .faq-search-area { margin-bottom: 16px; }
-    .faq-search-input {
-      padding: 11px 14px 11px 42px;
-      border-radius: 11px;
-      font-size: 13.5px;
-    }
-    .faq-search-icon { left: 13px; }
-    .faq-search-icon svg, .faq-search-area svg { width: 16px !important; height: 16px !important; }
-
-    /* Accordion */
-    .faq-main-list { gap: 10px; }
-    .faq-card { border-radius: 12px; }
-    .faq-trigger { padding: 14px 14px; gap: 10px; }
-    .faq-q-text { font-size: 13.5px; line-height: 1.4; }
-    .faq-icon-box { width: 24px; height: 24px; font-size: 14px; }
-    .faq-answer {
-      padding: 0 14px 14px 14px;
-      font-size: 13px;
-      line-height: 1.55;
-    }
-  }
-
-  /* Tiny phones */
-  @media (max-width: 380px) {
-    .faq-title { font-size: 17px !important; }
-    .faq-nav-item { min-width: 145px; }
-    .faq-q-text { font-size: 12.5px; }
-    .faq-answer { font-size: 12px; }
-  }
-`;
-
-const categories = [
-  { name: "General", sub: "Platform basics", color: "var(--color-1)", icon: Globe },
-  { name: "Technical", sub: "Setup & Speed", color: "var(--color-2)", icon: Settings },
-  { name: "Security", sub: "Privacy & Fraud", color: "var(--color-3)", icon: ShieldCheck },
-  { name: "Account", sub: "Porting & Billing", color: "var(--color-4)", icon: UserCircle },
-  { name: "Features", sub: "AI & Integrations", color: "var(--color-5)", icon: Cpu },
-  { name: "Support", sub: "Emergency & Help", color: "var(--color-6)", icon: LifeBuoy },
+// ─── Data ─────────────────────────────────────────────────────────────────────
+const CATEGORIES = [
+  { name: "General",   sub: "Platform basics",   color: "#06b6d4", Icon: GlobeIcon  },
+  { name: "Technical", sub: "Setup & Speed",      color: "#f97316", Icon: TechIcon   },
+  { name: "Security",  sub: "Privacy & Fraud",    color: "#8b5cf6", Icon: ShieldIcon },
+  { name: "Account",   sub: "Porting & Billing",  color: "#ec4899", Icon: UserIcon   },
+  { name: "Features",  sub: "AI & Integrations",  color: "#10b981", Icon: GridIcon   },
+  { name: "Support",   sub: "Emergency & Help",   color: "#3b82f6", Icon: SupportIcon},
 ];
 
-const faqs = [
-  /* ───────── GENERAL (5) ───────── */
-  { id: 1, cat: "General", q: "What is VoIP?", a: "VoIP (Voice over Internet Protocol) allows you to make voice and video calls over the internet instead of traditional phone lines." },
-  { id: 2, cat: "General", q: "Who can use VoIP services?", a: "VoIP is suitable for businesses of all sizes, remote teams, and individuals who need flexible communication." },
-  { id: 3, cat: "General", q: "Can I make international calls?", a: "Yes, VoIP allows you to make international calls at significantly reduced rates compared to traditional providers." },
-  { id: 4, cat: "General", q: "How quickly can I get started?", a: "Most users can set up and start using VoIP within minutes after account activation." },
-  { id: 5, cat: "General", q: "Do I need special equipment?", a: "No special hardware is required. You can use VoIP on mobile apps, desktop software, or IP phones." },
-
-  /* ───────── TECHNICAL (5) ───────── */
-  { id: 6, cat: "Technical", q: "How does VoIP work?", a: "Your voice is converted into digital packets and transmitted securely over the internet using advanced codecs." },
-  { id: 7, cat: "Technical", q: "What internet speed is required?", a: "A stable connection with at least 100 kbps per call is recommended for optimal quality." },
-  { id: 8, cat: "Technical", q: "What happens if my internet goes out?", a: "We offer Call Continuity which automatically reroutes calls to your mobile device if your office internet fails." },
-  { id: 9, cat: "Technical", q: "What router settings are best?", a: "Enabling Quality of Service (QoS) on your router to prioritize SIP traffic ensures the best audio quality." },
-  { id: 10, cat: "Technical", q: "Does VoIP support HD audio?", a: "Yes, VoIP systems use wideband codecs to deliver HD voice quality over stable internet connections." },
-
-  /* ───────── SECURITY (5) ───────── */
-  { id: 11, cat: "Security", q: "Is my data safe?", a: "We use TLS and SRTP end-to-end encryption, backed by ISO-certified cloud infrastructure." },
-  { id: 12, cat: "Security", q: "Do you protect against spam calls?", a: "We implement AI-driven fraud detection, IP filtering, and traffic monitoring to prevent unauthorized access." },
-  { id: 13, cat: "Security", q: "How do you prevent vishing attacks?", a: "We use STIR/SHAKEN protocols to verify caller ID and protect against number spoofing." },
-  { id: 14, cat: "Security", q: "Is VoIP encrypted?", a: "Yes, all calls and signaling are encrypted using modern industry standards." },
-  { id: 15, cat: "Security", q: "Can hackers intercept VoIP calls?", a: "With encrypted transmission and secure infrastructure, interception is highly unlikely and prevented by default." },
-
-  /* ───────── ACCOUNT (5) ───────── */
-  { id: 16, cat: "Account", q: "Can I port my existing number?", a: "Yes — you can transfer your existing business number with zero downtime. Our team manages the entire process." },
-  { id: 17, cat: "Account", q: "Can I cancel anytime?", a: "Yes. There are no long-term contracts. You can upgrade, downgrade, or cancel anytime from your dashboard." },
-  { id: 18, cat: "Account", q: "Are there activation fees?", a: "No. Setup and activation are 100% free with no hidden charges." },
-  { id: 19, cat: "Account", q: "Can I use multiple devices?", a: "Yes, you can log in from multiple devices including mobile, desktop, and desk phones." },
-  { id: 20, cat: "Account", q: "Is billing monthly or yearly?", a: "We offer flexible billing options including monthly and discounted yearly plans." },
-
-  /* ───────── FEATURES (5) ───────── */
-  { id: 21, cat: "Features", q: "What features are included?", a: "HD calling, IVR systems, real-time analytics, recordings, and CRM integrations are included." },
-  { id: 22, cat: "Features", q: "Do you offer call recording?", a: "Yes, automatic and on-demand call recording is available with secure cloud storage." },
-  { id: 23, cat: "Features", q: "Does the platform support video conferencing?", a: "Yes, HD video conferencing with screen sharing and recording for up to 500 participants is supported." },
-  { id: 24, cat: "Features", q: "Is VoIP suitable for remote teams?", a: "Yes, it enables global communication through voice, video, and messaging from anywhere." },
-  { id: 25, cat: "Features", q: "Does it integrate with CRM tools?", a: "Yes, it integrates with popular CRM platforms for seamless workflow automation." },
-
-  /* ───────── SUPPORT (5) ───────── */
-  { id: 26, cat: "Support", q: "Can I use VoIP for emergency calls?", a: "Yes, we support E911. You must maintain an updated physical address for emergency routing." },
-  { id: 27, cat: "Support", q: "What support is available?", a: "We provide 24/7 technical support via live chat, email, and phone." },
-  { id: 28, cat: "Support", q: "Is training provided for staff?", a: "Yes, we offer free onboarding webinars and video tutorials." },
-  { id: 29, cat: "Support", q: "Do you provide setup assistance?", a: "Yes, our team assists with full setup and configuration for businesses." },
-  { id: 30, cat: "Support", q: "How fast is your response time?", a: "Most support queries are answered within minutes via live chat." },
+const FAQS = [
+  // General
+  { id: 1,  cat: "General",   q: "What is VoIP?",                               a: "VoIP (Voice over Internet Protocol) allows you to make voice and video calls over the internet instead of traditional phone lines." },
+  { id: 2,  cat: "General",   q: "Who can use VoIP services?",                  a: "VoIP is suitable for businesses of all sizes, remote teams, and individuals who need flexible communication." },
+  { id: 3,  cat: "General",   q: "Can I make international calls?",              a: "Yes, VoIP allows you to make international calls at significantly reduced rates compared to traditional providers." },
+  { id: 4,  cat: "General",   q: "How quickly can I get started?",               a: "Most users can set up and start using VoIP within minutes after account activation." },
+  { id: 5,  cat: "General",   q: "Do I need special equipment?",                 a: "No special hardware is required. You can use VoIP on mobile apps, desktop software, or IP phones." },
+  // Technical
+  { id: 6,  cat: "Technical", q: "How does VoIP work?",                          a: "Your voice is converted into digital packets and transmitted securely over the internet using advanced codecs." },
+  { id: 7,  cat: "Technical", q: "What internet speed is required?",             a: "A stable connection with at least 100 kbps per call is recommended for optimal quality." },
+  { id: 8,  cat: "Technical", q: "What happens if my internet goes out?",        a: "We offer Call Continuity which automatically reroutes calls to your mobile device if your office internet fails." },
+  { id: 9,  cat: "Technical", q: "What router settings are best?",               a: "Enabling Quality of Service (QoS) on your router to prioritize SIP traffic ensures the best audio quality." },
+  { id: 10, cat: "Technical", q: "Does VoIP support HD audio?",                  a: "Yes, VoIP systems use wideband codecs to deliver HD voice quality over stable internet connections." },
+  // Security
+  { id: 11, cat: "Security",  q: "Is my data safe?",                             a: "We use TLS and SRTP end-to-end encryption, backed by ISO-certified cloud infrastructure." },
+  { id: 12, cat: "Security",  q: "Do you protect against spam calls?",           a: "We implement AI-driven fraud detection, IP filtering, and traffic monitoring to prevent unauthorized access." },
+  { id: 13, cat: "Security",  q: "How do you prevent vishing attacks?",          a: "We use STIR/SHAKEN protocols to verify caller ID and protect against number spoofing." },
+  { id: 14, cat: "Security",  q: "Is VoIP encrypted?",                           a: "Yes, all calls and signaling are encrypted using modern industry standards." },
+  { id: 15, cat: "Security",  q: "Can hackers intercept VoIP calls?",            a: "With encrypted transmission and secure infrastructure, interception is highly unlikely and prevented by default." },
+  // Account
+  { id: 16, cat: "Account",   q: "Can I port my existing number?",               a: "Yes — you can transfer your existing business number with zero downtime. Our team manages the entire process." },
+  { id: 17, cat: "Account",   q: "Can I cancel anytime?",                        a: "Yes. There are no long-term contracts. You can upgrade, downgrade, or cancel anytime from your dashboard." },
+  { id: 18, cat: "Account",   q: "Are there activation fees?",                   a: "No. Setup and activation are 100% free with no hidden charges." },
+  { id: 19, cat: "Account",   q: "Can I use multiple devices?",                  a: "Yes, you can log in from multiple devices including mobile, desktop, and desk phones." },
+  { id: 20, cat: "Account",   q: "Is billing monthly or yearly?",                a: "We offer flexible billing options including monthly and discounted yearly plans." },
+  // Features
+  { id: 21, cat: "Features",  q: "What features are included?",                  a: "HD calling, IVR systems, real-time analytics, recordings, and CRM integrations are included." },
+  { id: 22, cat: "Features",  q: "Do you offer call recording?",                 a: "Yes, automatic and on-demand call recording is available with secure cloud storage." },
+  { id: 23, cat: "Features",  q: "Does the platform support video conferencing?",a: "Yes, HD video conferencing with screen sharing and recording for up to 500 participants is supported." },
+  { id: 24, cat: "Features",  q: "Is VoIP suitable for remote teams?",           a: "Yes, it enables global communication through voice, video, and messaging from anywhere." },
+  { id: 25, cat: "Features",  q: "Does it integrate with CRM tools?",            a: "Yes, it integrates with popular CRM platforms for seamless workflow automation." },
+  // Support
+  { id: 26, cat: "Support",   q: "Can I use VoIP for emergency calls?",          a: "Yes, we support E911. You must maintain an updated physical address for emergency routing." },
+  { id: 27, cat: "Support",   q: "What support is available?",                   a: "We provide 24/7 technical support via live chat, email, and phone." },
+  { id: 28, cat: "Support",   q: "Is training provided for staff?",              a: "Yes, we offer free onboarding webinars and video tutorials." },
+  { id: 29, cat: "Support",   q: "Do you provide setup assistance?",             a: "Yes, our team assists with full setup and configuration for businesses." },
+  { id: 30, cat: "Support",   q: "How fast is your response time?",              a: "Most support queries are answered within minutes via live chat." },
 ];
 
-function FAQCard({ faq, color }) {
-  const [open, setOpen] = useState(false);
+// ─── FAQCard ──────────────────────────────────────────────────────────────────
+function FAQCard({ faq, color, isOpen, onToggle }) {
   return (
-    <div className={`faq-card ${open ? 'open' : ''}`} style={{ '--active-color': color }}>
-      <button className="faq-trigger" onClick={() => setOpen(!open)}>
-        <span className="faq-q-text">{faq.q}</span>
-        <span className="faq-icon-box">+</span>
+    <div
+      className="bg-white rounded-2xl overflow-hidden transition-all duration-300"
+      style={{
+        border: `1px solid ${isOpen ? color : "#eaecf0"}`,
+      }}
+    >
+      <button
+        className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left cursor-pointer bg-transparent border-none outline-none"
+        onClick={onToggle}
+        aria-expanded={isOpen}
+      >
+        <span className="text-base font-semibold text-gray-900 leading-snug">
+          {faq.q}
+        </span>
+        <span
+          className="flex-shrink-0 w-7 h-7 rounded-md flex items-center justify-center text-xl leading-none transition-all duration-300"
+          style={{
+            background: isOpen ? color : "#f9fafb",
+            color: isOpen ? "#fff" : "#667085",
+            transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
+          }}
+        >
+          +
+        </span>
       </button>
-      <div className="faq-body" style={{ maxHeight: open ? "400px" : "0" }}>
-        <p className="faq-answer">{faq.a}</p>
+
+      {/* Animated body */}
+      <div
+        className="overflow-hidden transition-all duration-400 ease-in-out"
+        style={{ maxHeight: isOpen ? "400px" : "0" }}
+      >
+        <p className="px-6 pb-6 text-gray-500 leading-relaxed text-sm">
+          {faq.a}
+        </p>
       </div>
     </div>
   );
 }
 
-export default function ProfessionalVoIPFAQ() {
+// ─── Main Component ───────────────────────────────────────────────────────────
+export default function VoipFAQ() {
   const [activeCat, setActiveCat] = useState("General");
-  const [search, setSearch] = useState("");
+  const [search, setSearch]       = useState("");
+  const [openId, setOpenId]       = useState(null);
 
-  const filtered = faqs.filter(f =>
-    f.cat === activeCat &&
-    (f.q.toLowerCase().includes(search.toLowerCase()))
+  const activeColor = CATEGORIES.find(c => c.name === activeCat)?.color ?? "#06b6d4";
+
+  const filtered = FAQS.filter(
+    f => f.cat === activeCat && f.q.toLowerCase().includes(search.toLowerCase())
   );
 
-  const activeCategoryData = categories.find(c => c.name === activeCat);
+  const handleCatChange = (name) => {
+    setActiveCat(name);
+    setSearch("");
+    setOpenId(null);
+  };
+
+  const handleToggle = (id) => setOpenId(prev => prev === id ? null : id);
 
   return (
-    <div className="faq-root">
-      <style>{styles}</style>
-      <section className="faq-section">
-        <div className="faq-container">
-          <header className="faq-header">
-            <span className="faq-eyebrow">Expert Guidance</span>
-            <h5 className="faq-title">Helpful Answers to Your Questions</h5>
+    <div
+      className="min-h-screen w-full"
+      style={{ background: "#fcfcfd", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+    >
+      {/* Google Font */}
+      <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+      />
+
+      <section className="w-full px-3.5 py-2.5 min-h-screen">
+        <div className="max-w-[1200px] mx-auto">
+
+          {/* ── Header ── */}
+          <header
+            className="mb-3.5 px-5 py-2.5 text-center rounded-lg w-full"
+            style={{
+              border: "1px solid #eaecf0",
+              boxShadow: "0 2px 10px rgba(0,0,0,0.03)",
+            }}
+          >
+            <span className="block text-[11px] font-bold uppercase tracking-[2.5px] text-gray-500 opacity-80 mb-4">
+              Expert Guidance
+            </span>
+            <h1
+              className="font-semibold leading-snug max-w-2xl mx-auto"
+              style={{ fontSize: "clamp(24px, 4vw, 32px)", color: "#f4944f", letterSpacing: "-0.2px" }}
+            >
+              Helpful Answers to Your Questions
+            </h1>
           </header>
 
-          <div className="faq-grid">
-            <aside className="faq-sidebar">
-              <nav className="faq-nav">
-                {categories.map((cat) => {
-                  const Icon = cat.icon;
+          {/* ── Grid ── */}
+          <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-4 lg:gap-12 items-start">
+
+            {/* ── Sidebar ── */}
+            <aside className="lg:sticky lg:top-10">
+              {/* Mobile: horizontal scroll strip */}
+              {/* Tablet: 2-col grid */}
+              {/* Desktop: vertical list */}
+              <nav
+                className="
+                  flex flex-row gap-2 overflow-x-auto pb-2 -mx-3.5 px-3.5
+                  sm:grid sm:grid-cols-2 sm:overflow-visible sm:mx-0 sm:px-0 sm:pb-0 sm:gap-2.5
+                  lg:flex lg:flex-col lg:gap-3 lg:overflow-visible lg:mx-0 lg:px-0 lg:pb-0
+                "
+                style={{ scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch" }}
+              >
+                {CATEGORIES.map(cat => {
+                  const isActive = activeCat === cat.name;
                   return (
-                    <div
+                    <button
                       key={cat.name}
-                      className={`faq-nav-item ${activeCat === cat.name ? 'active' : ''}`}
-                      style={{ '--active-color': cat.color }}
-                      onClick={() => setActiveCat(cat.name)}
+                      onClick={() => handleCatChange(cat.name)}
+                      className="
+                        flex items-center bg-white rounded-xl cursor-pointer outline-none
+                        transition-all duration-300 text-left
+                        flex-none min-w-[148px] p-2.5
+                        sm:flex-auto sm:min-w-0 sm:p-2.5
+                        lg:p-2.5
+                      "
+                      style={{
+                        border: `1px solid ${isActive ? "#3b82f6" : "#eaecf0"}`,
+                        transform: isActive ? "translateX(8px)" : "translateX(0)",
+                        boxShadow: isActive ? "0 10px 15px -3px rgba(0,0,0,0.08)" : "none",
+                        scrollSnapAlign: "start",
+                        // disable translateX on non-desktop
+                        ...(typeof window !== "undefined" && window.innerWidth < 1024
+                          ? { transform: "none" }
+                          : {}),
+                      }}
+                      aria-pressed={isActive}
                     >
-                      <div className="faq-nav-icon-wrapper">
-                        <Icon size={22} strokeWidth={2.5} />
+                      <div
+                        className="w-9 h-9 lg:w-11 lg:h-11 rounded-xl lg:rounded-xl flex items-center justify-center flex-shrink-0 mr-2.5"
+                        style={{
+                          background: cat.color,
+                          color: "#fff",
+                          boxShadow: "0 4px 6px -1px rgba(0,0,0,0.1)",
+                        }}
+                      >
+                        <cat.Icon />
                       </div>
-                      <div className="faq-nav-text">
-                        <span className="faq-nav-label">{cat.name}</span>
-                        <span className="faq-nav-sub">{cat.sub}</span>
+                      <div>
+                        <span className="block text-[13px] lg:text-[15px] font-semibold text-gray-900">
+                          {cat.name}
+                        </span>
+                        <span className="text-[11px] lg:text-xs text-gray-500">{cat.sub}</span>
                       </div>
-                    </div>
+                    </button>
                   );
                 })}
               </nav>
             </aside>
 
-            <div className="faq-content-main">
-              <div className="faq-search-area">
-                <Search className="faq-search-icon" size={20} />
+            {/* ── Content ── */}
+            <div>
+              {/* Search */}
+              <div className="relative mb-4 lg:mb-7">
+                <span className="absolute left-[14px] lg:left-[18px] top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+                  <SearchIcon />
+                </span>
                 <input
-                  className="faq-search-input"
                   type="text"
-                  placeholder={`Search in ${activeCat}...`}
                   value={search}
-                  onChange={(e) => setSearch(e.target.value)}
+                  onChange={e => { setSearch(e.target.value); setOpenId(null); }}
+                  placeholder={`Search in ${activeCat}...`}
+                  className="
+                    w-full bg-white text-gray-900 outline-none transition-all duration-200
+                    placeholder-gray-400
+                    pl-10 pr-4 py-3 text-sm rounded-xl
+                    lg:pl-[52px] lg:pr-5 lg:py-3.5 lg:text-[15px] lg:rounded-2xl
+                  "
+                  style={{
+                    border: "1px solid #eaecf0",
+                    boxShadow: "0 1px 2px rgba(16,24,40,0.04)",
+                    fontFamily: "inherit",
+                  }}
+                  onFocus={e => {
+                    e.target.style.borderColor = activeColor;
+                    e.target.style.boxShadow   = `0 0 0 4px ${activeColor}26`;
+                  }}
+                  onBlur={e => {
+                    e.target.style.borderColor = "#eaecf0";
+                    e.target.style.boxShadow   = "0 1px 2px rgba(16,24,40,0.04)";
+                  }}
                 />
               </div>
 
-              <div className="faq-main-list">
-                {filtered.map(faq => (
-                  <FAQCard key={faq.id} faq={faq} color={activeCategoryData.color} />
-                ))}
+              {/* Accordion list */}
+              <div className="flex flex-col gap-2 lg:gap-3">
+                {filtered.length > 0 ? (
+                  filtered.map(faq => (
+                    <FAQCard
+                      key={faq.id}
+                      faq={faq}
+                      color={activeColor}
+                      isOpen={openId === faq.id}
+                      onToggle={() => handleToggle(faq.id)}
+                    />
+                  ))
+                ) : (
+                  <p className="text-gray-400 text-sm py-2">No results found.</p>
+                )}
               </div>
             </div>
           </div>

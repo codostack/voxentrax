@@ -7,40 +7,44 @@ import { IoMdChatbubbles } from 'react-icons/io';
 
 const SocialLanding = () => {
   return (
-    <div className="min-h-[88vh] w-full flex flex-col md:flex-row items-center bg-white font-sans overflow-hidden">
+    <div className="min-h-[88vh] w-full flex flex-col md:flex-row items-center justify-center md:justify-start bg-white font-sans overflow-hidden">
       
       {/* Left Side: Content */}
-     <div className="w-full md:w-1/2 p-12 lg:p-24 z-10 space-y-6">
+      <div className="w-full md:w-1/2 p-8 sm:p-12 lg:p-24 z-10 space-y-6 text-center md:text-left flex flex-col items-center md:items-start">
 
-            <h1 className="font-[system-ui] text-3xl sm:text-4xl leading-[1.08] tracking-tight text-gray-500">
-            Grow Your Digital{" "}
-            <span className="text-blue-500">
-              Presence Together
-            </span>
-          </h1>
+        <h1 className="font-[system-ui] text-3xl sm:text-4xl leading-[1.08] tracking-tight text-gray-500">
+          Grow Your Digital{" "}
+          <span className="text-blue-500">
+            Presence Together
+          </span>
+        </h1>
 
-          <p className="font-['DM_Sans',sans-serif] text-gray-500 text-sm md:text-[16px] leading-7 tracking-normal
-              text-justify max-w-[600px] [@media(min-width:1300px)]:max-w-[560px]">Connect with your audience across all platforms using our integrated solutions.
-Leverage powerful tools to unify communication, optimize performance, and elevate customer experiences.
-Designed for scalability and reliability, our solutions help you stay ahead in a rapidly evolving digital landscape.
-  </p>
+        <p className="font-['DM_Sans',sans-serif] text-gray-500 text-sm md:text-[16px] leading-7 tracking-normal
+            text-justify max-w-[600px] [@media(min-width:1300px)]:max-w-[560px]">
+          Connect with your audience across all platforms using our integrated solutions.
+          Leverage powerful tools to unify communication, optimize performance, and elevate customer experiences.
+          Designed for scalability and reliability, our solutions help you stay ahead in a rapidly evolving digital landscape.
+        </p>
 
-          <div className="flex items-center gap-3 flex-wrap justify-center [@media(min-width:1300px)]:justify-start pt-1">
-            <button className="inline-flex items-center gap-2 px-6 py-3 text-white text-sm font-semibold
-              bg-blue-500 hover:bg-blue-600 transition-all duration-200 rounded-lg shadow-md shadow-blue-100 cursor-pointer">
-              Get Started
-            </button>
-            <button className="inline-flex items-center gap-2 px-5 py-3 text-sm font-medium
-              text-gray-700 border border-gray-300 bg-gray-50
-              hover:bg-gray-100 hover:border-gray-400 transition-all duration-200 rounded-lg cursor-pointer">
-              Learn More
-            </button>
-          </div>
+        <div className="flex items-center gap-3 flex-wrap justify-center [@media(min-width:1300px)]:justify-start pt-1">
+          <button className="inline-flex items-center gap-2 px-6 py-3 text-white text-sm font-semibold
+            bg-blue-500 hover:bg-blue-600 transition-all duration-200 rounded-lg shadow-md shadow-blue-100 cursor-pointer">
+            Get Started
+          </button>
+          <button className="inline-flex items-center gap-2 px-5 py-3 text-sm font-medium
+            text-gray-700 border border-gray-300 bg-gray-50
+            hover:bg-gray-100 hover:border-gray-400 transition-all duration-200 rounded-lg cursor-pointer">
+            Learn More
+          </button>
+        </div>
 
-</div>
+      </div>
 
-      {/* Right Side: Icon Grid Area */}
-      <div style={{marginBottom:"66px"}} className="w-full md:w-1/2 h-[500px] relative">
+      {/* Right Side: Icon Grid Area — hidden on mobile */}
+      <div
+        style={{ marginBottom: "66px" }}
+        className="hidden md:block w-full md:w-1/2 h-[500px] relative"
+      >
         
         {/* Facebook (Top Center) */}
         <div className="absolute top-[10%] left-[40%] bg-[#56acc4] p-6 rounded-xl shadow-xl">

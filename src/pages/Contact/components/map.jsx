@@ -6,7 +6,7 @@ function GermanyMap() {
     <div className="w-full relative">
 
       {/* FULL WIDTH MAP */}
-      <div className="w-full h-[500px]">
+      <div className="w-full h-[300px] sm:h-[400px] md:h-[500px]">
         <iframe
           title="Germany Map"
           src="https://www.google.com/maps?q=Berlin,Germany&output=embed"
@@ -15,10 +15,15 @@ function GermanyMap() {
         ></iframe>
       </div>
 
-      {/* OVERLAY CONTACT BOX */}
-      <div className="absolute top-2 left-2 bg-white rounded-2xl shadow-xl p-6 w-[90%] max-w-sm">
-        
-        <h2 className="text-xl font-bold text-gray-800 mb-4">
+      {/* CONTACT BOX
+          - Mobile: sits below the map as a normal full-width card
+          - md+   : floats over the map (top-left), exactly as before */}
+      <div className="bg-white rounded-2xl shadow-xl p-5 sm:p-6
+                      mx-4 -mt-10 relative z-10
+                      md:absolute md:top-2 md:left-2 md:mx-0 md:mt-0
+                      md:w-[90%] md:max-w-sm">
+
+        <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-4">
           Germany Office
         </h2>
 
@@ -26,7 +31,7 @@ function GermanyMap() {
 
           {/* Address */}
           <div className="flex items-start gap-3">
-            <FaMapMarkerAlt className="text-orange-500 mt-1" />
+            <FaMapMarkerAlt className="text-orange-500 mt-1 flex-shrink-0" />
             <p>
               Berlin, Germany <br />
               Street Name, ZIP Code
@@ -35,14 +40,14 @@ function GermanyMap() {
 
           {/* Phone */}
           <div className="flex items-center gap-3">
-            <FaPhoneAlt className="text-orange-500" />
+            <FaPhoneAlt className="text-orange-500 flex-shrink-0" />
             <p>+49 123 456 7890</p>
           </div>
 
           {/* Email */}
           <div className="flex items-center gap-3">
-            <FaEnvelope className="text-orange-500" />
-            <p>support@yourcompany.com</p>
+            <FaEnvelope className="text-orange-500 flex-shrink-0" />
+            <p className="break-all">support@yourcompany.com</p>
           </div>
         </div>
 
@@ -56,6 +61,9 @@ function GermanyMap() {
           View on Map
         </a>
       </div>
+
+      {/* small bottom spacing on mobile so the floating card has breathing room */}
+      <div className="h-4 md:hidden" />
 
     </div>
   );
