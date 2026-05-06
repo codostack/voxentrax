@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import api from "../api/axios";
 
 // ── Moved outside component to avoid missing-dependency warnings ──
 const ENC_LABELS = ["TLS + SRTP", "Encrypted ✓", "Secure ✓", "AES-256"];
@@ -128,7 +129,7 @@ function VoipAnimation() {
             <div className="bg-white rounded-2xl" style={{ border: "1px solid #2279ea", padding: "14px 12px", width: 180, boxShadow: "0 2px 12px rgba(0,0,0,.06)" }}>
               <div className="text-[10px] text-slate-400 text-center mb-2 tracking-wide uppercase">Dialer</div>
               <div className="bg-slate-50 rounded-lg px-2 py-2 text-center mb-3" style={{ border: "1px solid #e2e8f0" }}>
-                <div className="text-[13px] font-medium text-slate-800 tracking-wider">+1 555 001</div>
+                <div className="text-[13px] font-medium text-slate-800 tracking-wider">+33756866331</div>
                 <div className="text-[10px] text-slate-400 mt-0.5">On call · <span className="font-medium text-slate-600">{fmt(secs)}</span></div>
               </div>
               <div className="grid grid-cols-3 gap-1 mb-3">
@@ -144,7 +145,7 @@ function VoipAnimation() {
               <div className="mt-2"><AudioBars color="#185FA5" /></div>
             </div>
             <div className="text-xs font-medium text-slate-800">Alice</div>
-            <div className="text-[11px] text-slate-400">+1 555 001 0001</div>
+            <div className="text-[11px] text-slate-400">+33756866331</div>
           </div>
 
           {/* CENTER CANVAS */}
@@ -442,27 +443,84 @@ function SuccessScreen({ name, email }) {
 export default function RegistrationPage() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", country: "", company: "", description: "" });
   const [errors, setErrors] = useState({});
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     setErrors({ ...errors, [e.target.name]: "" });
   };
 
-  const validate = () => {
-    const e = {};
-    if (!form.name) e.name = "Name is required";
-    if (!form.email.includes("@")) e.email = "Enter a valid email";
-    if (!form.phone) e.phone = "Phone is required";
-    if (!form.description) e.description = "Please add a short description";
-    return e;
-  };
+const validate = () => {
+  const e = {};
 
-  const handleSubmit = () => {
-    const e = validate();
-    if (Object.keys(e).length) return setErrors(e);
-    setSubmitted(true);
-  };
+  if (!form.name.trim()) {
+    e.name = "Name is required";
+  }
+
+  if (!form.email.trim()) {
+    e.email = "Email is required";
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+    e.email = "Enter a valid email";
+  }
+
+  if (!form.phone.trim()) {
+    e.phone = "Phone is required";
+  } else if (!/^[0-9]{7,15}$/.test(form.phone)) {
+    e.phone = "Enter valid phone number";
+  }
+
+  if (!form.country.trim()) {
+    e.country = "Country is required";
+  }
+
+  if (!form.company.trim()) {
+    e.company = "Company is required";
+  }
+
+  if (!form.description.trim()) {
+    e.description = "Please add a description";
+  } else if (form.description.length < 10) {
+    e.description = "Minimum 10 characters required";
+  }
+
+  return e;
+};
+
+const handleSubmit = async () => {
+  const e = validate();
+
+  if (Object.keys(e).length) {
+    setErrors(e);
+    return;
+  }
+
+  try {
+    const res = await api.post("/form/register", form);
+
+    if (res.data.success) {
+      // ✅ Show success message
+      alert("Submitted successfully");
+
+      // ✅ Clear form
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        country: "",
+        company: "",
+        description: "",
+      });
+
+      // ✅ Clear errors
+      setErrors({});
+    } else {
+      alert(res.data.message || "Something went wrong");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Server error");
+  }
+};
 
   if (submitted) return <SuccessScreen name={form.name} email={form.email} />;
 

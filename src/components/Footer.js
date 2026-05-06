@@ -476,7 +476,7 @@ export default function TelecomFooter() {
             <div className="tf-connect-list space-y-4 text-sm text-gray-400">
               <div className="flex items-center gap-3">
                 <FaPhoneAlt className="text-cyan-400 flex-shrink-0" />
-                <span>+1 (800) VOIP-XTX</span>
+                <span>+33756866331</span>
               </div>
               <div className="flex items-center gap-3">
                 <FaEnvelope className="text-cyan-400 flex-shrink-0" />

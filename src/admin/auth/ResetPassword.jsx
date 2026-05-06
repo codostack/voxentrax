@@ -33,7 +33,7 @@ export default function ResetPassword() {
       setLoading(true);
 
       await api.post(
-        `http://localhost:5000/api/auth/reset-password/${token}`,
+        `/auth/reset-password/${token}`,
         { password }
       );
 

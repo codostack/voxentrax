@@ -30,19 +30,24 @@ const Navbar = () => {
     { name: nav.faq, href: "/faq" },
   ];
 
-  const languages = [
-    { name: "English", code: "en" },
-    { name: "French", code: "fr" },
-    { name: "Arabic", code: "ar" },
-    { name: "Spanish", code: "es" },
-  ];
+const languages = [
+  { name: "English", code: "en" },
+  { name: "French", code: "fr" },
+  { name: "Arabic", code: "ar" },
+  { name: "Spanish", code: "es" },
+  { name: "Japanese", code: "ja" },
+  { name: "German", code: "de" },
+  { name: "Korean", code: "ko" },
+  { name: "Italian", code: "it" },
+  { name: "Chinese", code: "zh-CN" },
+];
 
   return (
     <>
       {/* ───── Translator Loading Overlay ───── */}
       {loading && <TranslatorLoader language={language} />}
 
-      <nav className="bg-white sticky top-0 z-50">
+      <nav data-no-translate className="bg-white sticky top-0 z-50">
         <div className="w-full px-6 py-4 relative flex items-center">
 
           {/* LEFT: Logo + Social */}

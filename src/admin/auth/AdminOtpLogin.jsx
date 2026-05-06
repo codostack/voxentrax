@@ -21,7 +21,7 @@ const AdminLogin = () => {
   const handleLogin = async () => {
     try {
       const res = await api.post(
-        "http://localhost:5000/api/auth/login-step1",
+        "/auth/login-step1",
         { username, password }
       );
 
@@ -37,7 +37,7 @@ const AdminLogin = () => {
   const verifyOtp = async () => {
     try {
       const res = await api.post(
-        "http://localhost:5000/api/auth/verify-otp",
+        "/auth/verify-otp",
         { email, otp }
       );
 

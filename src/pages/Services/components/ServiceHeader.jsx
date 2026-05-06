@@ -175,7 +175,7 @@ const VoipEnterpriseHero = () => {
                   <h3 className="text-sm font-semibold text-gray-800">
                     Incoming Call
                   </h3>
-                  <p className="text-xs text-gray-500 mb-4">+1 800 2344</p>
+                  <p className="text-xs text-gray-500 mb-4">+33756866331</p>
 
                   <div className="grid grid-cols-3 gap-3 w-full max-w-[160px]">
                     {[1, 2, 3, 4, 5, 6, 7, 8, 9, "*", 0, "#"].map((n) => (

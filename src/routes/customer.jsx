@@ -18,7 +18,7 @@ const PublicRoutes = () => {
       <Navbar />
       <PopupRateTable />
       <WhatsAppButton
-        phone="0000000000000"          // your number with country code (no +)
+        phone="+33756866331"          // your number with country code (no +)
         message="Hi! I’m interested in your services"
       />
       <Routes>

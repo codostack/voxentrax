@@ -1,26 +1,38 @@
-import { createContext, useState, useEffect } from "react";
+// LanguageContext.jsx
+import { createContext, useContext, useState, useEffect } from "react";
 
-export const LanguageContext = createContext();
+const LanguageContext = createContext(null);
 
-export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState(null); // 👈 start null
-  const [ready, setReady] = useState(false);
+/**
+ * Provides { language, setLanguage } to the entire tree.
+ * Persists the choice to localStorage.
+ * Children render immediately with the stored (or default) language.
+ */
+export function LanguageProvider({ children, defaultLanguage = "en" }) {
+  const [language, setLanguageState] = useState(() => {
+    return localStorage.getItem("selectedLanguage") || defaultLanguage;
+  });
 
-  useEffect(() => {
-    const savedLang = localStorage.getItem("selectedLanguage") || "en";
-    setLanguage(savedLang);
-    setReady(true); // ✅ language loaded
-  }, []);
-
-  useEffect(() => {
-    if (language) {
-      localStorage.setItem("selectedLanguage", language);
-    }
-  }, [language]);
+  const setLanguage = (lang) => {
+    if (!lang) return;
+    localStorage.setItem("selectedLanguage", lang);
+    setLanguageState(lang);
+  };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, ready }}>
+    <LanguageContext.Provider value={{ language, setLanguage }}>
       {children}
     </LanguageContext.Provider>
   );
-};
+}
+
+/**
+ * Convenience hook — throws if used outside <LanguageProvider>.
+ */
+export function useLanguage() {
+  const ctx = useContext(LanguageContext);
+  if (!ctx) throw new Error("useLanguage must be used inside <LanguageProvider>");
+  return ctx;
+}
+
+export { LanguageContext };

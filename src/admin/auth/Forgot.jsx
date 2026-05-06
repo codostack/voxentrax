@@ -14,7 +14,7 @@ export default function Forgot() {
 
     try {
       const res = await api.post(
-        "http://localhost:5000/api/auth/forgot-password",
+        "/auth/forgot-password",
         { email }
       );
 

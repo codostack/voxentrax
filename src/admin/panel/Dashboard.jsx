@@ -33,7 +33,7 @@ const RateTable = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await api.get("http://localhost:5000/api/rates", {
+      const res = await api.get("/rates", {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -65,11 +65,11 @@ const RateTable = () => {
     try {
       if (editData) {
         await api.put(
-          `http://localhost:5000/api/rates/${editData.id}`,
+          `/rates/${editData.id}`,
           form
         );
       } else {
-        await api.post("http://localhost:5000/api/rates", form);
+        await api.post("/rates", form);
       }
 
       setShowModal(false);
@@ -106,7 +106,7 @@ const RateTable = () => {
   };
   /* ---------------- DELETE ---------------- */
   const handleDelete = async () => {
-    await api.delete(`http://localhost:5000/api/rates/${deleteId}`);
+    await api.delete(`/rates/${deleteId}`);
     setDeleteId(null);
     fetchRates();
   };

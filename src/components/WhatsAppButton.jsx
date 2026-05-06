@@ -1,5 +1,5 @@
 // WhatsAppButton.jsx
-export default function WhatsAppButton({ phone = "91900000000000", message = "Hello, I need more info" }) {
+export default function WhatsAppButton({ phone = "+33756866331", message = "Hello, I need more info" }) {
   const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
   return (

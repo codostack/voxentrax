@@ -35,4 +35,52 @@ export const navbarTranslations = {
     faq: "Preguntas",
     demo: "Obtener demo",
   },
+
+  // NEW LANGUAGES (dummy but usable)
+
+  ja: {
+    home: "ホーム",
+    about: "会社概要",
+    services: "サービス",
+    rates: "料金",
+    contact: "お問い合わせ",
+    faq: "よくある質問",
+    demo: "デモを取得",
+  },
+  de: {
+    home: "Startseite",
+    about: "Über uns",
+    services: "Dienstleistungen",
+    rates: "Preise",
+    contact: "Kontakt",
+    faq: "FAQ",
+    demo: "Demo anfordern",
+  },
+  ko: {
+    home: "홈",
+    about: "소개",
+    services: "서비스",
+    rates: "요금",
+    contact: "문의",
+    faq: "자주 묻는 질문",
+    demo: "데모 요청",
+  },
+  it: {
+    home: "Home",
+    about: "Chi siamo",
+    services: "Servizi",
+    rates: "Prezzi",
+    contact: "Contatto",
+    faq: "FAQ",
+    demo: "Richiedi demo",
+  },
+  zh: {
+    home: "首页",
+    about: "关于我们",
+    services: "服务",
+    rates: "价格",
+    contact: "联系",
+    faq: "常见问题",
+    demo: "获取演示",
+  },
 };
