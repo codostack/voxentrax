@@ -7,6 +7,13 @@ const countries = ["US", "GB", "CA", "AU", "JP", "SG", "DE", "AE"];
 export default function VoIPHero() {
   const [tickets, setTickets] = useState(24);
   const [queued, setQueued] = useState(3);
+const [language, setLanguage] = useState(() => {
+  return localStorage.getItem("selectedLanguage") || "en";
+});
+
+useEffect(() => {
+  localStorage.setItem("selectedLanguage", language);
+}, [language]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -34,6 +41,46 @@ export default function VoIPHero() {
     { label: "Avg Wait", val: "0:18", color: "#2563eb", bg: "#eff6ff" },
     { label: "CSAT", val: "98%", color: "#059669", bg: "#ecfdf5" },
   ];
+
+  const HEADING_TRANSLATIONS = {
+  en: {
+    line1: "Cloud VoIP Built for",
+    highlight: "Modern Teams",
+  },
+  fr: {
+    line1: "VoIP Cloud conçu pour",
+    highlight: "les équipes modernes",
+  },
+  ar: {
+    line1: "VoIP السحابي المصمم لـ",
+    highlight: "الفرق الحديثة",
+  },
+  es: {
+    line1: "VoIP en la nube para",
+    highlight: "equipos modernos",
+  },
+  ja: {
+    line1: "クラウドVoIPは",
+    highlight: "現代のチーム向け",
+  },
+  de: {
+    line1: "Cloud-VoIP für",
+    highlight: "moderne Teams",
+  },
+  ko: {
+    line1: "클라우드 VoIP는",
+    highlight: "현대 팀을 위한",
+  },
+  it: {
+    line1: "VoIP cloud per",
+    highlight: "team moderni",
+  },
+  "zh-CN": {
+    line1: "云端 VoIP 专为",
+    highlight: "现代团队打造",
+  },
+};
+const t = HEADING_TRANSLATIONS[language] || HEADING_TRANSLATIONS.en;
 
   return (
     <div
@@ -108,12 +155,12 @@ export default function VoIPHero() {
       <div className="voip-hero-left space-y-8 animate-pop-in lg:col-span-1">
         <div className="space-y-4">
 
-          <h1 className="font-[system-ui] text-3xl sm:text-4xl leading-[1.08] tracking-tight text-gray-500">
-            Cloud VoIP Built for{" "}
-            <span className="text-blue-500">
-              Modern Teams
-            </span>
-          </h1>
+<h1 className="font-[system-ui] text-3xl sm:text-4xl leading-[1.08] tracking-tight text-gray-500">
+  {t.line1}{" "}
+  <span className="text-blue-500">
+    {t.highlight}
+  </span>
+</h1>
 
           <p className="font-['DM_Sans',sans-serif] text-gray-500 text-sm md:text-[16px] leading-7 tracking-normal
     text-justify max-w-[600px] [@media(min-width:1300px)]:max-w-[560px]">
