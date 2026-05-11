@@ -4,10 +4,10 @@ const waveBars = [4, 8, 14, 10, 18, 12, 20, 16, 10, 14];
 const encBars = Array.from({ length: 12 }, (_, i) => i);
 const countries = ["US", "GB", "CA", "AU", "JP", "SG", "DE", "AE"];
 
-export default function VoIPHero() {
+export default function VoIPHero({ onGetStarted, onLearnMore}) {
   const [tickets, setTickets] = useState(24);
   const [queued, setQueued] = useState(3);
-const [language, setLanguage] = useState(() => {
+const [language] = useState(() => {
   return localStorage.getItem("selectedLanguage") || "en";
 });
 
@@ -155,7 +155,7 @@ const t = HEADING_TRANSLATIONS[language] || HEADING_TRANSLATIONS.en;
       <div className="voip-hero-left space-y-8 animate-pop-in lg:col-span-1">
         <div className="space-y-4">
 
-<h1 className="font-[system-ui] text-3xl sm:text-4xl leading-[1.08] tracking-tight text-gray-500">
+<h1 data-no-translate className="font-[system-ui] text-3xl sm:text-4xl leading-[1.08] tracking-tight text-gray-500">
   {t.line1}{" "}
   <span className="text-blue-500">
     {t.highlight}
@@ -170,11 +170,15 @@ const t = HEADING_TRANSLATIONS[language] || HEADING_TRANSLATIONS.en;
         </div>
 
         <div className="voip-hero-cta flex items-center gap-3 flex-wrap justify-center [@media(min-width:1300px)]:justify-start pt-1">
-          <button className="inline-flex items-center gap-2 px-6 py-3 text-white text-sm font-semibold
+          <button 
+            onClick={onGetStarted}
+          className="inline-flex items-center gap-2 px-6 py-3 text-white text-sm font-semibold
               bg-blue-500 hover:bg-blue-600 transition-all duration-200 rounded-lg shadow-md shadow-blue-100 cursor-pointer">
             Get Started
           </button>
-          <button className="inline-flex items-center gap-2 px-5 py-3 text-sm font-medium
+          <button 
+            onClick={onLearnMore}
+          className="inline-flex items-center gap-2 px-5 py-3 text-sm font-medium
               text-gray-700 border border-gray-300 bg-gray-50
               hover:bg-gray-100 hover:border-gray-400 transition-all duration-200 rounded-lg cursor-pointer">
             Learn More

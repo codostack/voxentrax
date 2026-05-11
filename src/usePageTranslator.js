@@ -28,18 +28,6 @@ function collectTextNodes() {
   return nodes;
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Group sibling text nodes that share the same parent element.
-//
-// WHY: React splits JSX like:
-//   "Cloud VoIP Built for " <span>Modern Teams</span>
-// into multiple text nodes inside the same <h1>. When translated separately
-// they produce awkward or broken sentences in languages like Japanese.
-//
-// HOW: We merge adjacent text nodes whose parent is the same element into
-// one logical string for translation, then write the result back split
-// proportionally across the original nodes.
-// ─────────────────────────────────────────────────────────────────────────────
 function groupSiblingNodes(nodes) {
   // group[i] = { parent, nodeIndices: [i, j, ...], mergedText }
   const parentMap = new Map(); // parent element → first group index
@@ -239,3 +227,25 @@ export default function usePageTranslator(language) {
 
   return loading;
 }
+
+// ✅ expose global retrigger (CLEAN VERSION)
+window.retranslatePage = function () {
+  const nodes = collectTextNodes();
+  const groups = groupSiblingNodes(nodes);
+  const originals = nodes.map(n => n.nodeValue);
+
+  const lang = localStorage.getItem("selectedLanguage");
+  if (!lang || lang === "en") return;
+
+  const page = window.location.pathname.split("/").filter(Boolean)[0] || "home";
+  const apiTexts = buildTextsForAPI(nodes, groups);
+
+  batchTranslateText(apiTexts, page, lang)
+    .then(translated => {
+      if (translated.length !== apiTexts.length) return;
+      applyTranslations(nodes, originals, groups, translated);
+    })
+    .catch(() => {
+      restoreOriginals(nodes, originals);
+    });
+};

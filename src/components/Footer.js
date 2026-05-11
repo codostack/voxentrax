@@ -2,14 +2,13 @@ import { useState } from "react";
 import {
   FaLinkedinIn,
   FaFacebookF,
-  FaTwitter,
   FaWhatsapp,
   FaPhoneAlt,
   FaEnvelope,
   FaMapMarkerAlt,
 } from "react-icons/fa";
 import logo from "../assets/logo footer12.jpg";
-
+import { PiMicrosoftTeamsLogoFill } from "react-icons/pi";
 const footerLinks = {
   Services: [
     "VoIP Calling",
@@ -473,39 +472,59 @@ export default function TelecomFooter() {
             <h4 className="text-sm font-bold uppercase tracking-widest mb-6">
               Connect With Us
             </h4>
-            <div className="tf-connect-list space-y-4 text-sm text-gray-400">
-              <div className="flex items-center gap-3">
-                <FaPhoneAlt className="text-cyan-400 flex-shrink-0" />
-                <span>+33756866331</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <FaEnvelope className="text-cyan-400 flex-shrink-0" />
-                <span className="break-all">support@voxentrax.com</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <FaMapMarkerAlt className="text-cyan-400 mt-1 flex-shrink-0" />
-                <span>
-                  Global HQ: 123 Tech Plaza, <br />
-                  San Francisco, CA 94105
-                </span>
-              </div>
-            </div>
+<div className="tf-connect-list space-y-4 text-sm text-gray-400">
+  <div className="flex items-center gap-3">
+    <FaPhoneAlt className="text-cyan-400 flex-shrink-0" />
+    <span>+33 756866331</span>
+  </div>
 
-            <div className="tf-socials flex gap-4 mt-8">
-              {[
-                <FaLinkedinIn size={25} />,
-                <FaTwitter size={25} />,
-                <FaFacebookF size={25} />,
-                <FaWhatsapp size={25} />,
-              ].map((icon, i) => (
-                <button
-                  key={i}
-                  className="text-gray-400 hover:text-cyan-400 transition-all duration-200 flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/10"
-                >
-                  {icon}
-                </button>
-              ))}
-            </div>
+  <div className="flex items-center gap-3">
+    <FaEnvelope className="text-cyan-400 flex-shrink-0" />
+    <span className="break-all">support@voxentrax.com</span>
+  </div>
+
+  <div className="flex items-start gap-3">
+    <FaMapMarkerAlt className="text-cyan-400 mt-1 flex-shrink-0" />
+    <span>
+      25 Rue de la Paix,
+      <br />
+      75002 Paris,
+      <br />
+      France
+    </span>
+  </div>
+</div>
+
+<div className="tf-socials flex gap-4 mt-8">
+  {[
+    {
+      icon: <FaLinkedinIn size={25} />,
+      link: "https://www.linkedin.com",
+    },
+    {
+      icon: <PiMicrosoftTeamsLogoFill size={25} />,
+      link: " https://teams.live.com/l/invite/FEAVmowIZgooP2TAgE?v=g1",
+    },
+    {
+      icon: <FaFacebookF size={25} />,
+      link: "https://www.facebook.com",
+    },
+{
+  icon: <FaWhatsapp size={25} />,
+  link: "https://wa.me/33756866331?text=Hello%20Voxentrax",
+}
+  ].map((item, i) => (
+    <a
+      key={i}
+      href={item.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-gray-400 hover:text-cyan-400 transition-all duration-200 flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/10"
+    >
+      {item.icon}
+    </a>
+  ))}
+</div>
           </div>
         </div>
 

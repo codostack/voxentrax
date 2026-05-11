@@ -124,11 +124,11 @@ const data = res.data;
     { label: "24/7 Customer Support",      icon: Headphones,  border: "#f43f5e" },
   ];
 
-  const contacts = [
-    { text: "mail@example.com", icon: Mail   },
-    { text: "+33756866331",    icon: Phone  },
-    { text: "New York, USA",    icon: MapPin },
-  ];
+const contacts = [
+  { text: "ceo@voxentrax.com", icon: Mail },
+  { text: "+33 756866331", icon: Phone },
+  { text: "25 Rue de la Paix, 75002 Paris, France", icon: MapPin },
+];
 
   return (
     <>
@@ -157,9 +157,9 @@ const data = res.data;
               }}
             >
               <div>
-                <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.6)", margin: 0 }}>
-                  CONTACT US
-                </p>
+<p style={{ fontSize: "11px", color: "rgba(255,255,255,0.6)", margin: 0 }}>
+  VOXENTRAX FRANCE OFFICE
+</p>
                 <h2
                   className="cf-left-title"
                   style={{ fontSize: "34px", fontWeight: "600", letterSpacing: "-0.5px", color: "#fff", margin: "10px 0" }}
@@ -167,9 +167,17 @@ const data = res.data;
                   Let's Build{" "}
                   <span style={{ color: ORANGE }}>Better Communication</span>
                 </h2>
-                <p className="cf-left-sub" style={{ fontSize: "13px", color: "rgba(255,255,255,0.75)", margin: 0 }}>
-                  Scalable, secure, and clear communication solutions.
-                </p>
+<p
+  className="cf-left-sub"
+  style={{
+    fontSize: "13px",
+    color: "rgba(255,255,255,0.75)",
+    margin: 0,
+  }}
+>
+  Founded on 01 May 2024 by Kevin Dubois (KD). 
+  Delivering scalable, secure, and enterprise-grade communication solutions worldwide.
+</p>
                 <div className="cf-feature-list" style={{ marginTop: "20px", display: "flex", flexDirection: "column", gap: "10px" }}>
                   {features.map((f, i) => {
                     const Icon = f.icon;

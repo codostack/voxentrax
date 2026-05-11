@@ -9,7 +9,7 @@ import {
   Wifi,
 } from "lucide-react";
 
-const VoipEnterpriseHero = () => {
+const VoipEnterpriseHero = ({ onGetStarted, onLearnMore}) => {
   const [hoveredTab, setHoveredTab] = useState(null);
 
   const quadrants = [
@@ -71,11 +71,17 @@ const VoipEnterpriseHero = () => {
           </p>
 
           <div className="flex items-center gap-3 flex-wrap justify-center [@media(min-width:1300px)]:justify-start pt-1">
-            <button className="inline-flex items-center gap-2 px-6 py-3 text-white text-sm font-semibold
+            <button
+              onClick={onGetStarted}
+
+            className="inline-flex items-center gap-2 px-6 py-3 text-white text-sm font-semibold
               bg-blue-500 hover:bg-blue-600 transition-all duration-200 rounded-lg shadow-md shadow-blue-100 cursor-pointer">
               Get Started
             </button>
-            <button className="inline-flex items-center gap-2 px-5 py-3 text-sm font-medium
+            <button
+              onClick={onLearnMore}
+
+            className="inline-flex items-center gap-2 px-5 py-3 text-sm font-medium
               text-gray-700 border border-gray-300 bg-gray-50
               hover:bg-gray-100 hover:border-gray-400 transition-all duration-200 rounded-lg cursor-pointer">
               Learn More

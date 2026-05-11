@@ -12,14 +12,32 @@ import logo from "../assets/logo footer12.jpg";
 import { LanguageContext } from "../Context/LanguageContext";
 import usePageTranslator from "../usePageTranslator";
 import { navbarTranslations } from "./DummyTranslator/Navbar";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const Navbar = () => {
-  const [open, setOpen] = useState(false);
+const Navbar = ({ registerRef }) => {
+  const navigate = useNavigate();
+const location = useLocation();
+    const [open, setOpen] = useState(false);
   const { language, setLanguage } = useContext(LanguageContext);
 
   const loading = usePageTranslator(language); // Capture loading state
 
   const nav = navbarTranslations[language] || navbarTranslations.en;
+
+const scrollToRegister = () => {
+
+  // ✅ If user is on FAQ page → go to services page
+if (["/faq", "/rate"].includes(location.pathname)) {
+      navigate("/services");
+    return;
+  }
+
+  // ✅ Otherwise scroll normally
+  registerRef?.current?.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+};
 
   const navItems = [
     { name: nav.home, href: "/" },
@@ -126,9 +144,12 @@ const languages = [
               />
             </div>
 
-            <button className="px-5 py-2 rounded-lg bg-white text-orange-500 hover:bg-orange-50 transition border border-orange-400">
-              {nav.demo}
-            </button>
+<button
+  onClick={scrollToRegister}
+  className="px-5 py-2 rounded-lg bg-white text-orange-500 hover:bg-orange-50 transition border border-orange-400"
+>
+  {nav.demo}
+</button>
 
           </div>
 
@@ -168,9 +189,12 @@ const languages = [
                 ))}
               </select>
 
-              <button className="px-4 py-2 rounded-lg bg-blue-700 text-white">
-                {nav.demo}
-              </button>
+<button
+  onClick={scrollToRegister}
+  className="px-4 py-2 rounded-lg bg-blue-700 text-white"
+>
+  {nav.demo}
+</button>
             </div>
           </div>
         )}

@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home/page";
 import About from "../pages/About/page";
 import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
 import Contact from "../pages/Contact/page";
 import Services from "../pages/Services/page";
 import FAQ from "../pages/Faq/page";
@@ -15,7 +14,6 @@ import WhatsAppButton from "../components/WhatsAppButton";
 const PublicRoutes = () => {
   return (
     <>
-      <Navbar />
       <PopupRateTable />
       <WhatsAppButton
         phone="+33756866331"          // your number with country code (no +)

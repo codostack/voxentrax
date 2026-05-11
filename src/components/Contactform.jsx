@@ -201,7 +201,7 @@ function VoipAnimation() {
               </div>
             </div>
             <div className="text-xs font-medium text-slate-800">Bob</div>
-            <div className="text-[11px] text-slate-400">+44 7911 1234</div>
+            <div className="text-[11px] text-slate-400">+44 **** ****</div>
           </div>
         </div>
 
@@ -440,8 +440,8 @@ function SuccessScreen({ name, email }) {
 }
 
 /* ══════════ MAIN ══════════ */
-export default function RegistrationPage() {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", country: "", company: "", description: "" });
+export default function RegistrationPage({ formRef }) {
+    const [form, setForm] = useState({ name: "", email: "", phone: "", country: "", company: "", description: "" });
   const [errors, setErrors] = useState({});
   const [submitted] = useState(false);
 
@@ -610,8 +610,10 @@ const handleSubmit = async () => {
           </div>
 
           {/* RIGHT — Registration Form */}
-          <div className="form-card self-start flex flex-col">
-            <h2 className="text-[17px] font-medium mb-5 text-white">
+<div
+  ref={formRef}
+  className="form-card self-start flex flex-col"
+>            <h2 className="text-[17px] font-medium mb-5 text-white">
               Create account
             </h2>
 

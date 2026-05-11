@@ -1,14 +1,29 @@
 import React from 'react';
-import { 
-  FaFacebookF, FaTwitter, FaYoutube, 
-  FaInstagram, FaGooglePlusG, FaEnvelope 
+import {
+  FaFacebookF, FaTwitter, FaYoutube,
+  FaInstagram, FaGooglePlusG, FaEnvelope
 } from 'react-icons/fa';
 import { IoMdChatbubbles } from 'react-icons/io';
+import { useNavigate } from 'react-router-dom';
 
-const SocialLanding = () => {
+const SocialLanding = ({ formRef }) => {
+
+  const navigate = useNavigate();
+
+  const scrollToForm = () => {
+    formRef?.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
+  const goToAboutPage = () => {
+    navigate("/about");
+  };
+
   return (
     <div className="min-h-[88vh] w-full flex flex-col md:flex-row items-center justify-center md:justify-start bg-white font-sans overflow-hidden">
-      
+
       {/* Left Side: Content */}
       <div className="w-full md:w-1/2 p-8 sm:p-12 lg:p-24 z-10 space-y-6 text-center md:text-left flex flex-col items-center md:items-start">
 
@@ -27,13 +42,19 @@ const SocialLanding = () => {
         </p>
 
         <div className="flex items-center gap-3 flex-wrap justify-center [@media(min-width:1300px)]:justify-start pt-1">
-          <button className="inline-flex items-center gap-2 px-6 py-3 text-white text-sm font-semibold
-            bg-blue-500 hover:bg-blue-600 transition-all duration-200 rounded-lg shadow-md shadow-blue-100 cursor-pointer">
+          <button
+            onClick={scrollToForm}
+            className="inline-flex items-center gap-2 px-6 py-3 text-white text-sm font-semibold
+  bg-blue-500 hover:bg-blue-600 transition-all duration-200 rounded-lg shadow-md shadow-blue-100 cursor-pointer"
+          >
             Get Started
           </button>
-          <button className="inline-flex items-center gap-2 px-5 py-3 text-sm font-medium
-            text-gray-700 border border-gray-300 bg-gray-50
-            hover:bg-gray-100 hover:border-gray-400 transition-all duration-200 rounded-lg cursor-pointer">
+          <button
+            onClick={goToAboutPage}
+            className="inline-flex items-center gap-2 px-5 py-3 text-sm font-medium
+  text-gray-700 border border-gray-300 bg-gray-50
+  hover:bg-gray-100 hover:border-gray-400 transition-all duration-200 rounded-lg cursor-pointer"
+          >
             Learn More
           </button>
         </div>
@@ -45,7 +66,7 @@ const SocialLanding = () => {
         style={{ marginBottom: "66px" }}
         className="hidden md:block w-full md:w-1/2 h-[500px] relative"
       >
-        
+
         {/* Facebook (Top Center) */}
         <div className="absolute top-[10%] left-[40%] bg-[#56acc4] p-6 rounded-xl shadow-xl">
           <FaFacebookF className="text-white text-4xl" />
